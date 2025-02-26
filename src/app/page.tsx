@@ -10,6 +10,7 @@ import UseCasesSection from "./_components/UseCasesSection";
 import IntegrationsSection from "./_components/IntegrationsSection";
 import WhyChooseUs from "./_components/WhyChooseUs";
 import TestimonialsSection from "./_components/TestimonialsSection";
+import CTASection from "./_components/CTASection";
 
 // Feature data
 const featureData = [
@@ -89,6 +90,9 @@ export default function Home() {
 
         {/* TestimonialsSection */}
         <TestimonialsSection />
+
+        {/* CTASection */}
+        <CTASection />
       </main>
       <Footer />
     </div>
