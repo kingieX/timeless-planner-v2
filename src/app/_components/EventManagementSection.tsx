@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const EventPlanningTips = () => {
   return (
-    <section className=" border w-full flex flex-col md:flex-row items-center justify-between py-16 gap-8">
+    <section className=" border w-full flex flex-col md:flex-row items-center justify-between py-16 px-4 gap-8">
       {/* Image */}
       <div className="relative w-full md:w-2/5 md:bg-[#319AB5] flex md:justify-end">
         {/* <div className="absolute left-0 top-0 bg-[#319AB5] h-full rounded-tr -z-1"></div> */}

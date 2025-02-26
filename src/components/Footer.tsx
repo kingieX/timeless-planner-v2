@@ -17,7 +17,7 @@ const Footer = () => {
         </div>
 
         <div className="md:w-2/5 py-8">
-          <div className="w-full flex md:justify-end justify-center items-center md:gap-8 gap-4">
+          <div className="w-full flex md:flex-row flex-col md:justify-end justify-center items-center md:gap-8 gap-4">
             <div className="md:flex-grow flex justify-between px-2 py-1 border border-white rounded-full">
               <input
                 type="text"
