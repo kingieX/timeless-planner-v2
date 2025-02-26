@@ -48,7 +48,7 @@ const benefits = [
 
 export default function BenefitsSection() {
   return (
-    <section className="w-full py-16 bg-gray-50">
+    <section className="w-full py-16">
       <div className="max-w-6xl mx-auto px-6 md:px-12 text-cente">
         <h2 className="text-sm font-semibold text-[#42CEF2]">Benefits</h2>
         <p className="text-2xl text-primary font-semibold mt-2">

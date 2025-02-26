@@ -9,6 +9,7 @@ import AIFormsSection from "./_components/AIFormsSection";
 import UseCasesSection from "./_components/UseCasesSection";
 import IntegrationsSection from "./_components/IntegrationsSection";
 import WhyChooseUs from "./_components/WhyChooseUs";
+import TestimonialsSection from "./_components/TestimonialsSection";
 
 // Feature data
 const featureData = [
@@ -85,6 +86,9 @@ export default function Home() {
 
         {/* WhyChooseUs */}
         <WhyChooseUs />
+
+        {/* TestimonialsSection */}
+        <TestimonialsSection />
       </main>
       <Footer />
     </div>
