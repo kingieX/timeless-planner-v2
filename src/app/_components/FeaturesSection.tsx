@@ -23,18 +23,27 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
   return (
     <section className="w-full md:py-16 py-8 md:px-20 px-10 bg-white flex flex-col md:flex-row items-end justify-between gap-10">
       {/* Text Content */}
-      <div className="md:w-">
+      <div className="md:w-" data-aos="fade-right">
         <h2 className="text-3xl md:text-4xl md:text-left text-center font-bold text-primary">
           {title}
         </h2>
-        <p className="md:max-w-sm md:text-left text-center text-gray-600 mt-4">
+        <p
+          className="md:max-w-sm md:text-left text-center text-gray-600 mt-4"
+          data-aos="fade-right"
+          data-aos-delay="200"
+        >
           {description}
         </p>
 
         {/* Bullet Points */}
         <ul className="mt-6 space-y-4">
-          {features.map((feature) => (
-            <li key={feature.id} className="flex flex-col items-start gap-3">
+          {features.map((feature, index) => (
+            <li
+              key={feature.id}
+              className="flex flex-col items-start gap-3"
+              data-aos="fade-up"
+              data-aos-delay={`${index * 100}`} // Each item animates slightly later
+            >
               <div className="flex items-start gap-2">
                 <Check className="text-[#319AB5] w-6 h-6 bg-teal-50 rounded-full p-1" />
                 <div>
@@ -50,7 +59,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
       </div>
 
       {/* Image Section */}
-      <div className="md:w-">
+      <div className="md:w-" data-aos="fade-left">
         <div className="relative">
           <Image
             src={imageSrc}
@@ -59,8 +68,6 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
             height={400}
             className=""
           />
-          {/* Decorative Background Shape */}
-          {/* <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary opacity-20 rounded-lg -z-10"></div> */}
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@ const feedbackFeatures = [
       "Design your forms to ask the right questions and create a flow that aligns with your needs.",
   },
   {
-    title: " Dynamic Design Flow",
+    title: "Dynamic Design Flow",
     description:
       "Create personalized, conversational experiences that engage respondents and encourage thoughtful answers.",
   },
@@ -21,10 +21,10 @@ const feedbackFeatures = [
 
 export default function AIFormsSection() {
   return (
-    <section className="w-full md:py-16 py-8">
+    <section className="w-full md:py-16 py-8" data-aos="fade-up">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col md:flex-row items-center gap-10">
         {/* Left Side - Features */}
-        <div className="md:w-1/2 space-y-6">
+        <div className="md:w-1/2 space-y-6" data-aos="fade-right">
           <h2 className="text-2xl md:text-3xl md:text-left text-center max-w-lg font-bold text-gray-900">
             AI-Driven Feedback Forms <br />
             Collect Insights and Customize Your Flow
@@ -34,6 +34,8 @@ export default function AIFormsSection() {
               <div
                 key={index}
                 className="p-4 border border-gray-100 max-w-md rounded-lg bg-white flex items-center gap-4 transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary group"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <div className="flex items-start gap-2">
                   <Check className="text-[#319AB5] w-8 h-6 bg-teal-50 rounded p-1" />
@@ -52,7 +54,7 @@ export default function AIFormsSection() {
         </div>
 
         {/* Right Side - Image Mockup */}
-        <div className="md:w-1/2">
+        <div className="md:w-1/2" data-aos="fade-left">
           <Image
             src="/home/ai-feedback.png"
             alt="AI Feedback Forms"

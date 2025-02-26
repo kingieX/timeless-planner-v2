@@ -3,10 +3,13 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="w-full py-16 text-center">
+    <section className="w-full py-16 text-center" data-aos="fade-up">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="w-full bg-gradient-to-r from-gray-100 to-[#5598C4] md:py-32 py-12 px-8 flex flex-col items-center text-left rounded-2xl">
-          <div>
+        <div
+          className="w-full bg-gradient-to-r from-gray-100 to-[#5598C4] md:py-32 py-12 px-8 flex flex-col items-center text-left rounded-2xl"
+          data-aos="fade-up"
+        >
+          <div data-aos="fade-down">
             <p className="text-sm md:text-lg">Trusted By 900K+ users</p>
             <h2 className="text-2xl text-gray-900 md:text-4xl font-bold">
               Ready to plan your First Event?
@@ -17,7 +20,11 @@ export default function CTASection() {
             </p>
           </div>
 
-          <div className="mt-6 flex md:flex-row flex-col justify-center gap-4">
+          <div
+            className="mt-6 flex md:flex-row flex-col justify-center gap-4"
+            data-aos="fade-in"
+            data-aos-delay="200"
+          >
             <Link
               href="/signup"
               className="bg-primary text-white md:px-6 px-4 py-3 rounded-full shadow-md flex items-center justify-center gap-2 group hover:bg-opacity-80 transition"

@@ -24,20 +24,19 @@ export default function EventCreationSection() {
     <section className="w-full md:py-16 py-8 bg-[#A0E6F8]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col md:flex-row items-center gap-10">
         {/* Left Side - Features */}
-        <div className="md:w-1/2 space-y-6">
+        <div className="md:w-1/2 space-y-6" data-aos="fade-left">
           <h2 className="text-2xl md:text-3xl md:text-left text-center max-w-md font-bold text-gray-900">
             Effortless Event Creation & Management Streamline Your Event
             Planning
           </h2>
-          {/* <p className="text-gray-600 text-lg">
-            Streamline your event planning with powerful tools designed for ease
-            and efficiency.
-          </p> */}
+
           <div className="space-y-4">
             {features.map((feature, index) => (
               <div
                 key={index}
                 className="p-4 border border-gray-100 max-w-md rounded-lg bg-white flex items-center gap-4 transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary group"
+                data-aos="fade-up"
+                data-aos-delay={index * 200} // Delays each feature card animation
               >
                 <div className="flex items-start justify-center gap-2">
                   <Check className="text-[#319AB5] w-8 h-6 bg-teal-50 rounded p-1" />
@@ -56,7 +55,7 @@ export default function EventCreationSection() {
         </div>
 
         {/* Right Side - Image Mockup */}
-        <div className="md:w-1/2">
+        <div className="md:w-1/2" data-aos="fade-right">
           <Image
             src="/home/Event-creation.png"
             alt="Event Management UI"

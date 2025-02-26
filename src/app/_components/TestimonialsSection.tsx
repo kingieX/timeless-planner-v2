@@ -8,14 +8,14 @@ const testimonials = [
   {
     name: "Jane Doe",
     comment:
-      "This platform has made event planning so much easier for us! Overall, this service has been a life-changer for me. It has revolutionized his service has been a life-changer for me. It has revolutionizedhis service has been a life-changer for me. It has revolutionized freedom.",
+      "This platform has made event planning so much easier for us! Overall, this service has been a life-changer for me. It has revolutionized freedom.",
     image: "/home/customer.png",
     rating: 5,
   },
   {
     name: "John Smith",
     comment:
-      "Fantastic features and seamless integration with my workflow. Overall, this service has been a life-changer for me. It has revolutionized his service has been a life-changer for me. It has revolutionizedhis service has been a life-changer for me. It has revolutionized freedom.",
+      "Fantastic features and seamless integration with my workflow. This service has been a life-changer for me.",
     image: "/home/customer.png",
     rating: 4,
   },
@@ -39,7 +39,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="w-full py-16 text-center">
+    <section className="w-full py-16 text-center" data-aos="fade-up">
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         <div className="bg-gray-100 py-12 px-8 shadow-lg rounded-lg text-center flex flex-col">
           <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-6">
@@ -53,9 +53,10 @@ export default function TestimonialsSection() {
               width={80}
               height={80}
               className="w-20 h-24 rounded mb-4"
+              data-aos="fade-right"
             />
 
-            <div>
+            <div data-aos="fade-left">
               {/* Comment */}
               <p className="text-left text-gray-600 max-w-xl text-sm font-light">
                 {testimonials[index].comment}
@@ -81,7 +82,7 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Navigation Buttons */}
-                <div className="flex justify-between gap-4">
+                <div className="flex justify-between gap-4" data-aos="fade-in">
                   {/* Left Arrow */}
                   <button
                     onClick={prevTestimonial}

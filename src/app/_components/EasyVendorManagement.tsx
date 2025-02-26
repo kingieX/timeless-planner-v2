@@ -13,7 +13,7 @@ const vendorFeatures = [
       "Add vendor details manually—name, industry, contact info, and address—so you have everything in one place for quick reference.",
   },
   {
-    title: " Direct Vendor Communication",
+    title: "Direct Vendor Communication",
     description:
       "Contact vendors seamlessly through the app via email, WhatsApp, or SMS, making coordination fast and efficient.",
   },
@@ -24,7 +24,7 @@ export default function EasyVendorManagement() {
     <section className="w-full md:py-16 py-8 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col md:flex-row items-center gap-16">
         {/* Left Side - Image Mockup */}
-        <div className="md:w-1/2">
+        <div className="md:w-1/2" data-aos="fade-left">
           <Image
             src="/home/vendor-management.png"
             alt="Vendor Management UI"
@@ -35,7 +35,7 @@ export default function EasyVendorManagement() {
         </div>
 
         {/* Right Side - Features */}
-        <div className="md:w-1/2 space-y-6">
+        <div className="md:w-1/2 space-y-6" data-aos="fade-right">
           <h2 className="text-2xl md:text-3xl md:text-left text-center max-w-lg font-bold text-gray-900">
             Easy Vendor Management
             <br />
@@ -46,6 +46,8 @@ export default function EasyVendorManagement() {
               <div
                 key={index}
                 className="p-4 border border-gray-100 max-w-md rounded-lg bg-white flex items-center gap-4 transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary group"
+                data-aos="fade-up"
+                data-aos-delay={index * 200} // Adds delay for each feature card
               >
                 <div className="flex items-start gap-2">
                   <Check className="text-[#319AB5] w-8 h-6 bg-teal-50 rounded p-1" />

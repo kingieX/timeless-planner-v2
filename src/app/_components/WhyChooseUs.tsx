@@ -15,7 +15,7 @@ const benefits = [
     icon: <ShieldCheck className="text-white w-6 h-6" />,
   },
   {
-    title: "Save Time and  Effort",
+    title: "Save Time and Effort",
     description:
       "With TimelessPlanner, everything you need is in one place. From setting event details to managing tasks, guests, and vendors, the platform eliminates the need for multiple tools, saving you time and effort.",
     icon: <Clock className="text-white w-6 h-6" />,
@@ -33,7 +33,7 @@ const benefits = [
     icon: <CheckCircle className="text-white w-6 h-6" />,
   },
   {
-    title: "All-in-one Event Planning tool",
+    title: "All-in-One Event Planning Tool",
     description:
       "Connect with the tools you already use for a smooth experience.",
     icon: <Layers className="text-white w-6 h-6" />,
@@ -48,10 +48,19 @@ const benefits = [
 
 export default function BenefitsSection() {
   return (
-    <section className="w-full py-16">
-      <div className="max-w-6xl mx-auto px-6 md:px-12 text-cente">
-        <h2 className="text-sm font-semibold text-[#42CEF2]">Benefits</h2>
-        <p className="text-2xl text-primary font-semibold mt-2">
+    <section className="w-full py-16" data-aos="fade-up">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
+        <h2
+          className="text-sm font-semibold text-[#42CEF2]"
+          data-aos="fade-down"
+        >
+          Benefits
+        </h2>
+        <p
+          className="text-2xl text-primary font-semibold mt-2"
+          data-aos="fade-down"
+          data-aos-delay="200"
+        >
           Why Choose Us
         </p>
 
@@ -61,12 +70,14 @@ export default function BenefitsSection() {
             <div
               key={index}
               className={`p-6 rounded-lg flex flex-col items-start gap-4 transition-all duration-300
-        ${
-          index % 2 === 0
-            ? "bg-white md:bg-gray-100"
-            : "bg-gray-100 md:bg-white"
-        }
-      `}
+                ${
+                  index % 2 === 0
+                    ? "bg-white md:bg-gray-100"
+                    : "bg-gray-100 md:bg-white"
+                }
+              `}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
               {/* Icon */}
               <div className="w-12 h-12 rounded bg-primary flex items-center justify-center">
