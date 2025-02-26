@@ -1,52 +1,84 @@
-import { CheckCircle } from "lucide-react";
+import {
+  ShieldCheck,
+  Clock,
+  Users,
+  CheckCircle,
+  Layers,
+  Award,
+} from "lucide-react";
 
 const benefits = [
   {
-    title: "Smart Event Planning",
+    title: "Secure & Reliable",
     description:
-      "Leverage AI-driven insights to streamline event coordination.",
+      "We ensure top-notch security and reliability for your event management.",
+    icon: <ShieldCheck className="text-white w-6 h-6" />,
   },
   {
-    title: "Save Time & Effort",
-    description: "Automate tasks and reduce manual workload significantly.",
+    title: "Save Time and  Effort",
+    description:
+      "With TimelessPlanner, everything you need is in one place. From setting event details to managing tasks, guests, and vendors, the platform eliminates the need for multiple tools, saving you time and effort.",
+    icon: <Clock className="text-white w-6 h-6" />,
   },
   {
-    title: "Seamless Collaboration",
-    description: "Coordinate with vendors, teams, and attendees effortlessly.",
+    title: "User-Friendly",
+    description:
+      "An intuitive interface that makes event management easy for everyone.",
+    icon: <Users className="text-white w-6 h-6" />,
   },
   {
-    title: "Real-time Event Monitoring",
-    description: "Track event progress and receive instant updates.",
+    title: "Verified & Trusted",
+    description:
+      "Thousands of successful events managed with positive user feedback.",
+    icon: <CheckCircle className="text-white w-6 h-6" />,
+  },
+  {
+    title: "All-in-one Event Planning tool",
+    description:
+      "Connect with the tools you already use for a smooth experience.",
+    icon: <Layers className="text-white w-6 h-6" />,
+  },
+  {
+    title: "Award-Winning Service",
+    description:
+      "Recognized globally for excellent event management solutions.",
+    icon: <Award className="text-white w-6 h-6" />,
   },
 ];
 
-export default function WhyChooseUs() {
+export default function BenefitsSection() {
   return (
-    <section className="w-full md:py-16 py-8 bg-[#F5FAFF]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+    <section className="w-full py-16 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 text-cente">
+        <h2 className="text-sm font-semibold text-[#42CEF2]">Benefits</h2>
+        <p className="text-2xl text-primary font-semibold mt-2">
           Why Choose Us
-        </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mt-2">
-          Our platform simplifies event management with smart, efficient, and
-          easy-to-use tools.
         </p>
 
-        {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-6 mt-8">
+        {/* Grid Layout */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-all flex items-start gap-4"
+              className={`p-6 rounded-lg flex flex-col items-start gap-4 transition-all duration-300
+        ${
+          index % 2 === 0
+            ? "bg-white md:bg-gray-100"
+            : "bg-gray-100 md:bg-white"
+        }
+      `}
             >
-              <CheckCircle className="w-10 h-10 text-primary" />
+              {/* Icon */}
+              <div className="w-12 h-12 rounded bg-primary flex items-center justify-center">
+                {benefit.icon}
+              </div>
+
+              {/* Text */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
                   {benefit.title}
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  {benefit.description}
-                </p>
+                <p className="text-sm text-gray-600">{benefit.description}</p>
               </div>
             </div>
           ))}
