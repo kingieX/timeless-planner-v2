@@ -17,7 +17,7 @@ export default function CTASection() {
             </p>
           </div>
 
-          <div className="mt-6 flex justify-center gap-4">
+          <div className="mt-6 flex md:flex-row flex-col justify-center gap-4">
             <Link
               href="/signup"
               className="bg-primary text-white md:px-6 px-4 py-3 rounded-full shadow-md flex items-center justify-center gap-2 group hover:bg-opacity-80 transition"
