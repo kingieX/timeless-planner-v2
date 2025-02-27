@@ -66,7 +66,9 @@ function NavItem({
     <Link
       href={href}
       className={`${
-        isActive ? "text-white font-semibold" : "text-white hover:text-gray-300"
+        isActive
+          ? "text-white font-semibold"
+          : "text-white hover:text-gray-300 hover:underline"
       } ${mobile ? "block text-center py-2" : ""}`}
     >
       {label}
