@@ -105,8 +105,8 @@ function NavItem({
   label: string;
   mobile?: boolean;
 }) {
-  // const isActive = pathname === href;
-  const isActive = pathname.startsWith(href); // Matches all subpages too
+  const isActive = pathname === href;
+  // const isActive = pathname.startsWith(href); // Matches all subpages too
 
   return (
     <Link
