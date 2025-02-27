@@ -17,6 +17,7 @@ export default {
         icon: "#2369f4",
         secondary: "#445B64",
         custom: "#319AB5",
+        priceCard: "#061D3C",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
