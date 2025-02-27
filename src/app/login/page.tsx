@@ -1,19 +1,39 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { FaFacebook, FaRegEyeSlash } from "react-icons/fa";
+import { FaFacebook, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FiMail, FiLock } from "react-icons/fi";
 
+const textOverlay = [
+  "Create and Manage Events",
+  "Effortlessly organize events",
+  "From virtual to physical venues",
+  "Plan every detail your way",
+];
+
 export default function LoginPage() {
+  const [currentText, setCurrentText] = useState(0);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentText((prev) => (prev + 1) % textOverlay.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="w-full min-h-scree flex flex-col">
+    <div className="w-full min-h-screen flex flex-col">
       <Navbar />
       <div className="flex flex-col md:flex-row w-full h-full items-center mt-16">
-        {/* Left Section: Image */}
-        <div className="hidden md:block w-1/2 pr-12">
+        {/* Left Section: Image with Overlay */}
+        <div className="hidden md:block w-1/2 pr-12 relative">
           <Image
             src="/login-image.png"
             alt="Event Planning"
@@ -21,6 +41,11 @@ export default function LoginPage() {
             height={1000}
             className="content-evenly"
           />
+          <div className="absolute bottom-20 left-8 bg-white p-4 rounded-lg shadow-lg w-3/4">
+            <p className="text-lg font-semibold text-gray-900">
+              {textOverlay[currentText]}
+            </p>
+          </div>
         </div>
 
         {/* Right Section: Login Form */}
@@ -39,16 +64,30 @@ export default function LoginPage() {
                 type="email"
                 placeholder="olivia@untitledui.com"
                 className="w-full pl-10 p-3 border rounded-lg outline-none focus:ring focus:ring-primary"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="relative">
               <FiLock className="absolute left-3 top-4 text-gray-600" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="at least 8 character"
                 className="w-full pl-10 p-3 border rounded-lg outline-none focus:ring focus:ring-primary"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <FaRegEyeSlash className="absolute right-3 top-4 text-gray-600" />
+              {showPassword ? (
+                <FaRegEye
+                  className="absolute right-3 top-4 text-gray-600 cursor-pointer"
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <FaRegEyeSlash
+                  className="absolute right-3 top-4 text-gray-600 cursor-pointer"
+                  onClick={() => setShowPassword(true)}
+                />
+              )}
             </div>
             <div className="text-right">
               <a
@@ -60,8 +99,8 @@ export default function LoginPage() {
             </div>
             <button
               type="submit"
-              className="w-full bg-primary text-white p-3 rounded-lg hover:bg-primary-dark transition"
-              //   disabled ? '' : ''
+              className="w-full bg-primary text-white p-3 rounded-lg hover:bg-primary-dark transition disabled:bg-gray-300"
+              disabled={!email || !password}
             >
               Login
             </button>
