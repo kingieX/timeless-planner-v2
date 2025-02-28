@@ -21,7 +21,7 @@ export default function Topbar() {
 
   return (
     <div className="bg-white w-full flex fixed z-10 justify-between items-center px-6 py-2">
-      <div className="ml-10 md:ml-0 mt-1 flex-shrink-0 flex items-center">
+      <div className="ml-8 md:ml-0 mt-1 flex-shrink-0 flex items-center">
         <Image
           src="/logo.png"
           alt="TimelessPlanner Logo"
