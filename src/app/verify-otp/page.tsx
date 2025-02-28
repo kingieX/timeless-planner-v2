@@ -57,20 +57,20 @@ export default function VerifyOTPPage() {
             below to verify your account.
           </p>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="flex justify-start gap-4">
+            <div className="flex md:justify-start justify-center gap-4">
               {otp.map((digit, index) => (
                 <input
                   key={index}
                   id={`otp-${index}`}
                   type="text"
                   maxLength={1}
-                  className="w-12 h-12 text-center border rounded-lg text-lg focus:ring-primary focus:outline-none"
+                  className="w-12 h-12 md:w-20 md:h-20 text-center border rounded-lg text-lg md:text-2xl focus:ring-primary focus:outline-none"
                   value={digit}
                   onChange={(e) => handleChange(index, e.target.value)}
                 />
               ))}
             </div>
-            <p className="text-sm text-gray-600 mt-2">
+            <p className="text-sm text-center md:text-left text-gray-600 mt-2">
               Token expires in:{" "}
               <span className="text-blue-600 font-semibold">{`${Math.floor(
                 timeLeft / 60

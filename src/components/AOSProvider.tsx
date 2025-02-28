@@ -9,7 +9,7 @@ export default function AOSProvider() {
     AOS.init({
       duration: 600, // Animation duration
       once: false, // Ensures animation runs every time it enters the viewport
-      easing: "ease-in-out",
+      // easing: "ease-in-out",
     });
   }, []);
 
