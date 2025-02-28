@@ -3,22 +3,20 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import { FaFacebook, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiMail } from "react-icons/fi";
 import AuthOverlay from "@/components/AuthOverlay";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/dashboard");
+    router.push("/verify-otp");
   };
 
   return (
@@ -30,10 +28,9 @@ export default function LoginPage() {
 
         {/* Right Section: Login Form */}
         <div className="w-full md:w-1/2 bg-white p-8 max-w-xl md:ml-1 md:-mt-16">
-          <h2 className="text-2xl font-bold text-gray-900">Welcome back!</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Forgot Password</h2>
           <p className="text-gray-600 mt-2">
-            Simplify event planning with AI-powered tools for seamless
-            coordination and management.
+            Enter your email to send reset password link
           </p>
 
           {/* Login Form */}
@@ -48,46 +45,18 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="relative">
-              <FiLock className="absolute left-3 top-4 text-gray-600" />
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="at least 8 characters"
-                className="w-full pl-10 p-3 border rounded-lg outline-none focus:ring focus:ring-primary"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {showPassword ? (
-                <FaRegEye
-                  className="absolute right-3 top-4 text-gray-600 cursor-pointer"
-                  onClick={() => setShowPassword(false)}
-                />
-              ) : (
-                <FaRegEyeSlash
-                  className="absolute right-3 top-4 text-gray-600 cursor-pointer"
-                  onClick={() => setShowPassword(true)}
-                />
-              )}
-            </div>
-            <div className="text-right">
-              <Link
-                href="/forgot-password"
-                className="text-primary text-sm font-medium hover:underline"
-              >
-                Forgot Password?
-              </Link>
-            </div>
+
             <button
               type="submit"
               className="w-full bg-primary text-white p-3 rounded-lg hover:bg-primary-dark transition disabled:bg-primary/60"
-              disabled={!email || !password}
+              disabled={!email}
             >
-              Login
+              Send link
             </button>
           </form>
 
           {/* Social Login */}
-          <div className="flex items-center my-4">
+          <div className="flex items-center my-4 py-8">
             <hr className="flex-grow border-gray-300" />
             <span className="px-3 text-gray-500 text-sm">Or</span>
             <hr className="flex-grow border-gray-300" />
