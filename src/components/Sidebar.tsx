@@ -54,7 +54,7 @@ export default function Sidebar() {
     <div className="flex">
       {/* Sidebar */}
       <div
-        className={`flex flex-col justify-between bg-white w-64 min-h-screen px-6 py-4 border-r-2 fixed z-10 transition-transform ${
+        className={`flex flex-col justify-between bg-white w-64 min-h-screen md:px-6 px-2 py-4 border-r-2 fixed z-10 transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-64"
         } md:translate-x-0 overflow-y-auto max-h-screen`}
       >
@@ -152,7 +152,7 @@ function SidebarLink({
     <li>
       <Link
         href={href}
-        className={`flex items-center space-x-3 px-4 py-1 text-sm rounded transition ${
+        className={`flex items-center space-x-3 md:px-4 px-2 md:py-1 py-2 md:text-sm rounded transition ${
           isActive
             ? "bg-gray-100 text-gray-900 font-semibold"
             : "hover:text-primary text-gray-700"
