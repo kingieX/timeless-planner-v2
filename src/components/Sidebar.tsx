@@ -83,7 +83,7 @@ export default function Sidebar() {
         </div>
 
         {/* Bottom Section */}
-        <div className="overflow-y-auto">
+        <div className="">
           {/* My Workspace */}
           <Link
             href="/workspace"
