@@ -56,7 +56,7 @@ export default function Sidebar() {
       <div
         className={`flex flex-col justify-between bg-white w-64 min-h-screen md:px-6 px-2 py-4 border-r-2 fixed z-10 transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-64"
-        } md:translate-x-0 overflow-y-auto max-h-screen pb-20`}
+        } md:translate-x-0 overflow-y-auto max-h-screen pb-32 md:pb-2`}
       >
         {/* Sidebar Content */}
         <div>
