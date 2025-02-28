@@ -1,7 +1,8 @@
 "use client";
 
 // import { usePathname } from "next/navigation";
-import { Bell, UserCircle } from "lucide-react";
+import { Bell, UserRound } from "lucide-react";
+import Image from "next/image";
 
 export default function Topbar() {
   //   const pathname = usePathname();
@@ -20,16 +21,27 @@ export default function Topbar() {
 
   return (
     <div className="bg-white flex justify-between items-center px-6 py-4">
-      {/* <h2 className="text-2xl font-bold text-secondary">{currentTitle}</h2> */}
-
+      <div className="md:hidden ml-10 md:ml-0 mt-1 flex-shrink-0 flex items-center mb-4">
+        <Image
+          src="/logo.png"
+          alt="TimelessPlanner Logo"
+          width={32}
+          height={32}
+          className="mr-2"
+        />
+        <span className="md:text-lg font-semibold">Timeless Planner</span>
+      </div>
+      <div></div>
       <div className="flex items-center space-x-4">
         <button className="relative">
           <Bell size={24} className="text-secondary hover:text-primary" />
-          <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+          <span className="absolute -top-2 -right-1 bg-primary text-white text-xs w-4 rounded-full">
             3
           </span>
         </button>
-        <UserCircle size={32} className="text-secondary" />
+        <div className="flex justify-center items-center bg-gray-100 rounded-full p-2">
+          <UserRound size={16} className="text-secondary" />
+        </div>
       </div>
     </div>
   );
