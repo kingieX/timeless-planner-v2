@@ -125,10 +125,10 @@ export default function Sidebar() {
 
       {/* Mobile Sidebar Toggle */}
       <button
-        className="md:hidden fixed top-4 left-4 bg-primary text-white z-20 p-2 rounded"
+        className="md:hidden fixed top-3 left-4 bg-primary text-white z-20 p-2 rounded"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <X size={16} /> : <Menu size={16} />}
       </button>
     </div>
   );

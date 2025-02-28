@@ -10,7 +10,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <main className="p-6 bg-white">
+    <main className="p-6 bg-white mt-8">
       <h2 data-aos="fade-up" className="text-3xl font-semibold text-primary">
         Welcome to Your Dashboard
       </h2>
