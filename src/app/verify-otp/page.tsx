@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import AuthOverlay from "@/components/AuthOverlay";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function VerifyOTPPage() {
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -56,7 +57,7 @@ export default function VerifyOTPPage() {
             below to verify your account.
           </p>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="flex justify-between">
+            <div className="flex justify-start gap-4">
               {otp.map((digit, index) => (
                 <input
                   key={index}
@@ -91,6 +92,16 @@ export default function VerifyOTPPage() {
               Resend Code
             </button>
           )}
+          {/* Signup Link */}
+          <p className="text-center text-sm text-gray-600 md:mt-16 mt-4">
+            Didn't get an OTP?{" "}
+            <Link
+              href="/login"
+              className="text-primary font-medium hover:underline"
+            >
+              Click here
+            </Link>
+          </p>
         </div>
       </div>
     </div>

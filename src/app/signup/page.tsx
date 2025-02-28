@@ -133,7 +133,7 @@ export default function SignupPage() {
               className="w-full bg-primary text-white p-3 rounded-lg hover:bg-primary-dark transition disabled:bg-primary/60"
               disabled={!email || !password || !confirmPassword}
             >
-              Login
+              Sign up
             </button>
           </form>
 
