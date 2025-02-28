@@ -51,12 +51,12 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex overflow-y-auto max-h-screen">
+    <div className="flex">
       {/* Sidebar */}
       <div
         className={`flex flex-col justify-between bg-white w-64 min-h-screen md:px-6 px-2 py-4 border-r-2 fixed z-10 transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-64"
-        } md:translate-x-0 overflow-y-auto max-h-screen`}
+        } md:translate-x-0 overflow-y-auto max-h-screen pb-20`}
       >
         {/* Sidebar Content */}
         <div>
@@ -75,7 +75,7 @@ export default function Sidebar() {
           </div>
 
           {/* Sidebar Links */}
-          <ul className="space-y-1">
+          <ul className="space-y-1 overflow-y-auto">
             {sidebarLinks.map((link) => (
               <SidebarLink key={link.href} {...link} pathname={pathname} />
             ))}
@@ -83,7 +83,7 @@ export default function Sidebar() {
         </div>
 
         {/* Bottom Section */}
-        <div>
+        <div className="overflow-y-auto">
           {/* My Workspace */}
           <Link
             href="/workspace"
