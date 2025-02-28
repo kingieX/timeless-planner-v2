@@ -11,7 +11,9 @@ export default function DashboardLayout({
   return (
     // <NotificationProvider>
     <div className="flex">
-      <Sidebar />
+      <div className="overflow-y-auto max-h-screen">
+        <Sidebar />
+      </div>
       <Topbar />
       <div className="flex-1 min-h-screen bg-white md:ml-64">
         <main className="p-6">{children}</main>
