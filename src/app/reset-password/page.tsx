@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import { FaFacebook, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+// import { FcGoogle } from "react-icons/fc";
 import { FiLock } from "react-icons/fi";
 import AuthOverlay from "@/components/AuthOverlay";
 import { useRouter } from "next/navigation";
