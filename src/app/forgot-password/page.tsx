@@ -8,32 +8,40 @@ import { FcGoogle } from "react-icons/fc";
 import { FiMail } from "react-icons/fi";
 import AuthOverlay from "@/components/AuthOverlay";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const router = useRouter();
+  const [showPopup, setShowPopup] = useState(false);
+  //   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/verify-otp");
+    setShowPopup(true);
+
+    // Simulate API call delay before redirecting
+    // setTimeout(() => {
+    //   setShowPopup(false);
+    //   router.push("/verify-otp");
+    // }, 3000);
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col">
+    <div className="w-full min-h-screen flex flex-col relative">
       <Navbar />
       <div className="flex flex-col md:flex-row w-full h-full items-center mt-16">
         {/* Left Section: Image with Overlay */}
         <AuthOverlay />
 
-        {/* Right Section: Login Form */}
+        {/* Right Section: Forgot Password Form */}
         <div className="w-full md:w-1/2 bg-white p-8 max-w-xl md:ml-1 md:-mt-16">
           <h2 className="text-2xl font-bold text-gray-900">Forgot Password</h2>
           <p className="text-gray-600 mt-2">
-            Enter your email to send reset password link
+            Enter your email to receive a password reset link.
           </p>
 
-          {/* Login Form */}
+          {/* Form */}
           <form className="mt-12 space-y-4" onSubmit={handleSubmit}>
             <div className="relative">
               <FiMail className="absolute left-3 top-4 text-gray-600" />
@@ -83,6 +91,27 @@ export default function ForgotPasswordPage() {
           </p>
         </div>
       </div>
+
+      {/* Success Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+            <AiOutlineCheckCircle className="text-green-500 text-5xl mx-auto" />
+            <h3 className="text-lg font-semibold mt-4 text-gray-900">
+              Email Sent Successfully!
+            </h3>
+            <p className="text-gray-600 mt-2">
+              A password reset link has been sent to your email.
+            </p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="mt-4 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/60 transition"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
