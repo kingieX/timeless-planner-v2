@@ -88,7 +88,7 @@ export default function ResetPasswordPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                {showPassword ? (
+                {showConfirmPassword ? (
                   <FaRegEye
                     className="absolute right-3 top-4 text-gray-600 cursor-pointer"
                     onClick={() => setShowConfirmPassword(false)}
