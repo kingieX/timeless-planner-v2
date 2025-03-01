@@ -51,7 +51,7 @@ export function RecentEvents() {
               <p className="text-gray-900">{event.name}</p>
               <p className="text-sm text-gray-500">{event.description}</p>
             </div>
-            <span className="text-gray-600">{event.icon}</span>
+            <span className="text-gray-600 mr-2">{event.icon}</span>
           </Link>
         ))}
       </ul>
