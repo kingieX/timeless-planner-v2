@@ -105,8 +105,8 @@ export default function Sidebar() {
             className="w-full flex justify-between items-center space-x-2 px- py-1 text-sm rounded transition hover:text-primary"
           >
             <div className="flex items-center gap-2">
-              <div className="relative flex items-center border rounded-full w-10 h-10">
-                <UserRound size={20} />
+              <div className="relative flex justify-center items-center border rounded-full w-10 h-10">
+                <UserRound />
                 <span className="absolute top-6 right-0 bg-green-700 text-white text-xs w-2 h-2 rounded-full"></span>
               </div>
               <div className="flex flex-col">
