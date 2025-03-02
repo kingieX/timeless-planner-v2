@@ -20,7 +20,7 @@ export default function Topbar() {
   //   const currentTitle = pageTitles[pathname] || "Dashboard";
 
   return (
-    <div className="bg-white w-full flex fixed z-10 justify-between items-center px-6 py-2">
+    <div className="bg-white w-full flex fixed z-40 justify-between items-center px-6 py-2">
       <div className="ml-8 md:ml-0 mt-1 flex-shrink-0 flex items-center">
         <Image
           src="/logo.png"

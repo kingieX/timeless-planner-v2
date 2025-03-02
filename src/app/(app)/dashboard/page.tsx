@@ -44,31 +44,35 @@ export default function Dashboard() {
   //   teamLeads.length > 0;
 
   return (
-    <div className="py-6 mt-4">
-      <h2 className="md:text-2xl font-semibold mb-4">Dashboard</h2>
-
-      {/* Always Show Dashboard Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {cardData.map((card, index) => (
-          <DashboardCard
-            key={index}
-            icon={card.icon}
-            number={card.number}
-            title={card.title}
-            path={card.path}
-          />
-        ))}
+    <div className="py-6">
+      <div className="flex justify-center-center w-full py-4 bg-white shadow-sm mb-4 fixed z-10">
+        <h2 className="md:text-2xl font-semibold">Dashboard</h2>
       </div>
 
-      {/* Show other components only if there are activities */}
-      {/* {hasActivities && ( */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <RecentEvents />
-        <RecentTasks />
-        <TeamChat />
-        <TeamLeads />
+      <div className="mt-20 px-1">
+        {/* Always Show Dashboard Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {cardData.map((card, index) => (
+            <DashboardCard
+              key={index}
+              icon={card.icon}
+              number={card.number}
+              title={card.title}
+              path={card.path}
+            />
+          ))}
+        </div>
+
+        {/* Show other components only if there are activities */}
+        {/* {hasActivities && ( */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <RecentEvents />
+          <RecentTasks />
+          <TeamChat />
+          <TeamLeads />
+        </div>
+        {/* )} */}
       </div>
-      {/* )} */}
     </div>
   );
 }

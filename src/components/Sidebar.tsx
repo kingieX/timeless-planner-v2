@@ -54,7 +54,7 @@ export default function Sidebar() {
     <div className="flex">
       {/* Sidebar */}
       <div
-        className={`flex flex-col justify-between bg-white w-64 min-h-screen md:px-6 px-2 py-4 border-r-2 fixed z-10 transition-transform ${
+        className={`flex flex-col justify-between bg-white w-64 min-h-screen md:px-6 px-2 py-4 border-r-2 fixed z-30 transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-64"
         } md:translate-x-0 overflow-y-auto max-h-screen pb-32 md:pb-2`}
       >
@@ -125,7 +125,7 @@ export default function Sidebar() {
 
       {/* Mobile Sidebar Toggle */}
       <button
-        className="md:hidden fixed top-3 left-4 bg-primary text-white z-20 p-2 rounded"
+        className="md:hidden fixed top-3 left-4 bg-primary text-white z-50 p-2 rounded"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X size={16} /> : <Menu size={16} />}
@@ -146,7 +146,8 @@ function SidebarLink({
   label: string;
   pathname: string;
 }) {
-  const isActive = pathname === href;
+  // const isActive = pathname === href;
+  const isActive = pathname.startsWith(href); // Matches all subpages too
 
   return (
     <li>
