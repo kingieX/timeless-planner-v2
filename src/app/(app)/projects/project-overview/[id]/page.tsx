@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -22,11 +23,7 @@ const projectData = [
   },
 ];
 
-export default function ProjectOverview({
-  params,
-}: {
-  params: { id: number };
-}) {
+export default function ProjectOverview({ params }: { params: { id: any } }) {
   const project = projectData.find((proj) => proj.id === Number(params.id));
 
   if (!project) {
