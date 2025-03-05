@@ -50,7 +50,7 @@ const AllProjects = ({ filter }: { filter: string }) => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="w-full md:w-2/4 flex justify-between items-center gap-2 bg-white p-4 border-l-4 border-l-[#42CEF2] shadow-md rounded-b-lg rounded-t-none "
+              className="w-full md:w-3/4 flex justify-between items-center gap-2 bg-white p-4 border-l-4 border-l-[#42CEF2] shadow-md rounded-b-lg rounded-t-none "
             >
               <div>
                 <h3

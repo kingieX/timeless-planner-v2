@@ -33,12 +33,12 @@ export default function CTASection() {
               <ArrowRight className="text-white transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
 
-            <Link
+            {/* <Link
               href="/features"
               className="border border-primary text-primary md:px-8 px-4 py-3 rounded-full shadow-md hover:bg-gray-200 transition"
             >
               Book a Demo
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

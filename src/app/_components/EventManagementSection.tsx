@@ -33,8 +33,9 @@ const EventPlanningTips = () => {
           data-aos="fade-right"
           data-aos-delay="200"
         >
-          Learn the key strategies to streamline event planning, enhance
-          coordination, and ensure success.
+          Plan ahead, stay organized with TimelessPlanner, communicate
+          effectively, track RSVPs, and always have a backup plan for a
+          stress-free, successful event!
         </p>
       </div>
     </section>

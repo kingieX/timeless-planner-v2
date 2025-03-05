@@ -76,10 +76,10 @@ export default function HeroSection() {
           </Link>
 
           <Link
-            href="/features"
+            href="/demo-video"
             className="border border-primary text-primary md:px-8 px-4 py-3 rounded-full shadow-md hover:bg-gray-200 transition"
           >
-            Explore
+            Watch Demo Video
           </Link>
         </div>
         <div
