@@ -2,14 +2,13 @@ import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
 import EmptyEvents from "../_components/EmptyEvents";
-import { FC } from "react";
 
 const projectData = [
   {
     id: 1,
     title: "Smart Waste Bin",
     description:
-      "Formal dinner following the wedding ceremony. Includes speeches, toasts, and a live band.Formal dinner following the wedding ceremony. Includes speeches, toasts, and a live band.Formal dinner following the wedding ceremony. Includes speeches, toasts, and a live band.Formal dinner following the wedding ceremony. Includes speeches, toasts, and a live band.",
+      "Formal dinner following the wedding ceremony. Includes speeches, toasts, and a live band.",
     createdTime: "March 1, 2025",
     projectDate: "March 10, 2025 - March 20, 2025",
   },
@@ -27,7 +26,7 @@ interface ProjectOverviewPageProps {
   params: { id: string };
 }
 
-const ProjectOverview: FC<ProjectOverviewPageProps> = ({ params }) => {
+export default function ProjectOverview({ params }: ProjectOverviewPageProps) {
   const project = projectData.find((proj) => proj.id === Number(params.id));
 
   if (!project) {
@@ -84,6 +83,4 @@ const ProjectOverview: FC<ProjectOverviewPageProps> = ({ params }) => {
       </div>
     </DashboardLayout>
   );
-};
-
-export default ProjectOverview;
+}
