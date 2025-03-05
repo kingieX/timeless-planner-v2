@@ -3,6 +3,7 @@ import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
 import EmptyEvents from "../_components/EmptyEvents";
+import { PageProps } from "next";
 
 const projectData = [
   {
@@ -23,11 +24,7 @@ const projectData = [
   },
 ];
 
-interface ProjectOverviewPageProps {
-  params: { id: Promise<any> };
-}
-
-export default function ProjectOverview({ params }: ProjectOverviewPageProps) {
+export default function ProjectOverview({ params }: PageProps<{ id: string }>) {
   const project = projectData.find((proj) => proj.id === Number(params.id));
 
   if (!project) {
