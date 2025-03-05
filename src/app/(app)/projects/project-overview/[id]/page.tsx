@@ -22,11 +22,15 @@ const projectData = [
   },
 ];
 
-interface ProjectOverviewPageProps {
-  params: { id: string };
-}
+// interface ProjectOverviewPageProps {
+//   params: { id: string };
+// }
 
-export default function ProjectOverview({ params }: ProjectOverviewPageProps) {
+export default function ProjectOverview({
+  params,
+}: {
+  params: { id: string };
+}) {
   // const project = projectData.find((proj) => proj.id === Number(params.id));
   const project = projectData.find(
     (proj) => proj.id === Number(params.id.toString())
