@@ -3,6 +3,7 @@ import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
 import EmptyEvents from "../_components/EmptyEvents";
+import { FC } from "react";
 
 const projectData = [
   {
@@ -23,7 +24,11 @@ const projectData = [
   },
 ];
 
-export default function ProjectOverview({ params }: { params: { id: any } }) {
+interface ProjectOverviewPageProps {
+  params: { id: string };
+}
+
+const ProjectOverview: FC<ProjectOverviewPageProps> = ({ params }) => {
   const project = projectData.find((proj) => proj.id === Number(params.id));
 
   if (!project) {
@@ -80,4 +85,6 @@ export default function ProjectOverview({ params }: { params: { id: any } }) {
       </div>
     </DashboardLayout>
   );
-}
+};
+
+export default ProjectOverview;
