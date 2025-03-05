@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
 import EmptyEvents from "../_components/EmptyEvents";
-import { PageProps } from "next";
 
 const projectData = [
   {
@@ -24,8 +22,15 @@ const projectData = [
   },
 ];
 
-export default function ProjectOverview({ params }: PageProps<{ id: string }>) {
-  const project = projectData.find((proj) => proj.id === Number(params.id));
+interface ProjectOverviewPageProps {
+  params: { id: string };
+}
+
+export default function ProjectOverview({ params }: ProjectOverviewPageProps) {
+  // const project = projectData.find((proj) => proj.id === Number(params.id));
+  const project = projectData.find(
+    (proj) => proj.id === Number(params.id.toString())
+  );
 
   if (!project) {
     return notFound(); // Show 404 page if project ID doesn't exist
