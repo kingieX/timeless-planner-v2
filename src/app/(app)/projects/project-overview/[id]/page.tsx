@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
