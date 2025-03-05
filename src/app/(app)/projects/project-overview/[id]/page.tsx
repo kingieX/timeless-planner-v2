@@ -25,7 +25,7 @@ const projectData = [
 export default function ProjectOverview({
   params,
 }: {
-  params: { id: string };
+  params: { id: number };
 }) {
   const project = projectData.find((proj) => proj.id === Number(params.id));
 
