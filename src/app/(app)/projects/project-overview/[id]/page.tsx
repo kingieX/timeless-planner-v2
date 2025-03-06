@@ -25,10 +25,12 @@ const projectData = [
 export default async function ProjectOverview({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id = await params.id; // Ensure it's resolved if it's async
-  const project = projectData.find((proj) => proj.id === Number(id));
+  const resolvedParams = await params; // Await if params is async
+  const project = projectData.find(
+    (proj) => proj.id === Number(resolvedParams.id)
+  );
 
   if (!project) {
     return notFound(); // Show 404 page if project ID doesn't exist
