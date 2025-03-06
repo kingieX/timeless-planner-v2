@@ -3,12 +3,6 @@ import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
 import EmptyEvents from "../_components/EmptyEvents";
 
-type ProjectOverviewPageProps = {
-  params: {
-    id: string;
-  };
-};
-
 const projectData = [
   {
     id: 1,
@@ -28,8 +22,19 @@ const projectData = [
   },
 ];
 
-export default function ProjectOverview({ params }: ProjectOverviewPageProps) {
-  const project = projectData.find((proj) => proj.id === Number(params.id));
+// interface ProjectOverviewPageProps {
+//   params: { id: string };
+// }
+
+export default function ProjectOverview({
+  params,
+}: {
+  params: { id: string };
+}) {
+  // const project = projectData.find((proj) => proj.id === Number(params.id));
+  const project = projectData.find(
+    (proj) => proj.id === Number(params.id.toString())
+  );
 
   if (!project) {
     return notFound(); // Show 404 page if project ID doesn't exist
