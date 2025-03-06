@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label";
 import { RefreshCcw } from "lucide-react";
 import Image from "next/image";
 
-export default function AddEventPage() {
+function AddEventForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -230,5 +230,14 @@ export default function AddEventPage() {
         </div>
       </div>
     </DashboardLayout>
+  );
+}
+
+// ✅ Wrap AddEventForm inside a Suspense boundary
+export default function AddEventPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AddEventForm />
+    </Suspense>
   );
 }
