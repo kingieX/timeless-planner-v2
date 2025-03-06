@@ -48,7 +48,7 @@ function AddEventForm() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 bg-white">
+      <div className="py-6 md:px-6 px-4 bg-white">
         <div className="flex flex-col w-full py-4 md:max-w-5xl bg-white mb-4 fixed z-10">
           <h2 className="md:text-2xl text-gray-500 font-semibold">Add Event</h2>
         </div>

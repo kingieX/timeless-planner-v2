@@ -58,7 +58,7 @@ export default function EmptyEvents({
   };
 
   return (
-    <div className="flex flex-col md:px-4 px-6 items-center max-w-sm justify-center h-full text-center">
+    <div className="flex flex-col md:px-4 px-2 items-center max-w-sm justify-center h-full text-center">
       <div className="bg-gray-100 p-6 rounded-full">
         <Image
           src="/projects/Illustration.png"
