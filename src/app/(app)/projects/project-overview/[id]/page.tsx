@@ -1,14 +1,7 @@
-"use client";
 import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
 import EmptyEvents from "../_components/EmptyEvents";
-
-type ProjectOverviewPageProps = {
-  params: {
-    id: string;
-  };
-};
 
 const projectData = [
   {
@@ -29,8 +22,13 @@ const projectData = [
   },
 ];
 
-export default function ProjectOverview({ params }: ProjectOverviewPageProps) {
-  const project = projectData.find((proj) => proj.id === Number(params.id));
+export default async function ProjectOverview({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const id = await params.id; // Ensure it's resolved if it's async
+  const project = projectData.find((proj) => proj.id === Number(id));
 
   if (!project) {
     return notFound(); // Show 404 page if project ID doesn't exist
