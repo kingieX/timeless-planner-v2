@@ -1,8 +1,6 @@
 import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { EllipsisVertical } from "lucide-react";
 import { notFound } from "next/navigation";
-import EmptyEvents from "../_components/EmptyEvents";
-import EventList from "../_components/EventList";
 
 const projectData = [
   {
@@ -59,17 +57,17 @@ const projectData = [
   },
 ];
 
-export default async function ProjectOverview({
+export default async function EventOverview({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = await params; // Await if params is async
-  const project = projectData.find(
+  const event = projectData.events.find(
     (proj) => proj.id === Number(resolvedParams.id)
   );
 
-  if (!project) {
+  if (!event) {
     return notFound(); // Show 404 page if project ID doesn't exist
   }
 
@@ -78,12 +76,12 @@ export default async function ProjectOverview({
       <div className="py-6 md:px-6 px-4 bg-white">
         <div className="flex flex-col w-full py-4 md:max-w-5xl bg-white mb-4 fixed z-10">
           <h2 className="md:text-2xl text-xl text-gray-500 font-semibold">
-            Project overview
+            Event overview
           </h2>
         </div>
 
         <div className="flex justify-between items-center mb-4 mt-20">
-          <h2 className="md:text-xl font-semibold">{project.title}</h2>
+          <h2 className="md:text-xl font-semibold">{event.title}</h2>
           <EllipsisVertical size={24} className="md:mr-8" />
         </div>
         <div className="flex justify-between gap-4 mb-4 md:max-w-md">
@@ -93,8 +91,8 @@ export default async function ProjectOverview({
             <p className="text-gray-500">Events</p>
           </div>
           <div className="space-y-2">
-            <p className="text-gray-800">{project.createdTime}</p>
-            <p className="text-gray-800">{project.projectDate}</p>
+            <p className="text-gray-800">{event.createdTime}</p>
+            <p className="text-gray-800">{event.projectDate}</p>
             <div className="flex justify-center items-center w-6 h-6 bg-gray-100 rounded">
               -
             </div>
@@ -105,7 +103,7 @@ export default async function ProjectOverview({
             Project Description
           </h3>
           <p className="text-gray-600 border rounded-md px-2 py-2 md:mr-8">
-            {project.description}
+            {event.description}
           </p>
         </div>
 
@@ -116,20 +114,6 @@ export default async function ProjectOverview({
               <p>Events</p>
             </div>
           </div>
-
-          {/* Division */}
-          {/* <div className="flex justify-center items-center py-8">
-            <EmptyEvents project={project} projectData={projectData} />
-          </div> */}
-          {project.events.length > 0 ? (
-            <div className="overflow-x-auto">
-              <EventList events={project.events} />
-            </div>
-          ) : (
-            <div className="flex justify-center items-center py-8">
-              <EmptyEvents project={project} projectData={projectData} />
-            </div>
-          )}
         </div>
       </div>
     </DashboardLayout>

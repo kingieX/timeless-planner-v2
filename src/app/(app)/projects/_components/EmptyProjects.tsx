@@ -28,7 +28,7 @@ export default function EmptyProjects() {
   };
 
   const handleProjectOverview = () => {
-    router.push("/projects/project-overview");
+    router.push("/projects");
   };
 
   return (

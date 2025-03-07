@@ -19,6 +19,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  // SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -31,21 +32,18 @@ interface Project {
   projectDate: string;
 }
 
-interface EmptyEventsProps {
-  project: Project;
+interface AddEventsProps {
+  //   project: Project;
   projectData: Project[];
 }
 
-export default function EmptyEvents({
-  project,
-  projectData,
-}: EmptyEventsProps) {
+export default function AddEvents({ projectData }: AddEventsProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [eventName, setEventName] = useState("");
-  const [selectedProject, setSelectedProject] = useState<string>(project.title);
+  const [selectedProject, setSelectedProject] = useState<string>("");
   const router = useRouter();
 
-  const projectId = String(project.id as number);
+  //   const projectId = String(project.id as number);
 
   // const handleSave = () => {
   //   router.push("/events/edit-event");
@@ -55,7 +53,7 @@ export default function EmptyEvents({
     const queryParams = new URLSearchParams({
       eventName: eventName,
       selectedProject: selectedProject,
-      projectId: projectId,
+      //   projectId: projectId,
     }).toString();
     router.push(`/events/add-event?${queryParams}`);
   };
@@ -79,7 +77,7 @@ export default function EmptyEvents({
         className="w-full block text-center bg-primary text-white py-2 mx-4 rounded-lg hover:bg-opacity-80 transition mt-4"
         onClick={() => setIsOpen(true)}
       >
-        Create Event
+        Add Event
       </Button>
 
       {/* Create Event Modal */}
@@ -107,10 +105,14 @@ export default function EmptyEvents({
               onValueChange={(value) => setSelectedProject(value)}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a project" />
+                <SelectValue
+                  className="text-gray-600"
+                  placeholder="Select a project"
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
+                  {/* <SelectLabel>Select Project</SelectLabel> */}
                   {projectData.map((proj) => (
                     <SelectItem key={proj.id} value={proj.title}>
                       {proj.title}

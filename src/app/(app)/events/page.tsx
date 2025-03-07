@@ -1,34 +1,36 @@
 "use client";
 import React, { useState } from "react";
 import DashboardLayout from "../dashboard/layout";
-import AllProjects from "./_components/AllProjects";
+// import AllProjects from "./_components/AllProjects";
 import { ChevronDown } from "lucide-react";
+import AllEvents from "./_components/AllEvents";
 
-const ProjectPage = () => {
-  const [selectedTab, setSelectedTab] = useState("projects");
-  const [filter, setFilter] = useState("All Projects");
+const EventPage = () => {
+  const [selectedTab, setSelectedTab] = useState("events");
+  const [filter, setFilter] = useState("All Events");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const filterOptions = ["All Projects", "Created by me", "Shared with me"];
+  // const filterOptions = ["All Events", "Created by me", "Shared with me"];
+  const filterOptions = ["Last 7 days", "Last 30 days", "All events"] as const;
 
   return (
     <DashboardLayout>
       <div className="py-6">
         <div className="flex flex-col w-full py-4 max-w-5xl bg-white mb-4 fixed z-10">
-          <h2 className="md:text-2xl font-semibold mb-4">Projects</h2>
+          <h2 className="md:text-2xl font-semibold mb-4">Events</h2>
 
           <div className="flex items-center justify-between border-b">
             {/* Tab Navigation */}
             <div className="flex gap-6">
               <button
                 className={`pb-2 ${
-                  selectedTab === "projects"
+                  selectedTab === "events"
                     ? "border-b-2 border-blue-500 text-blue-500 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => setSelectedTab("projects")}
+                onClick={() => setSelectedTab("events")}
               >
-                All Projects
+                All Events
               </button>
 
               <button
@@ -40,6 +42,17 @@ const ProjectPage = () => {
                 onClick={() => setSelectedTab("upcoming-events")}
               >
                 Upcoming Events
+              </button>
+
+              <button
+                className={`pb-2 ${
+                  selectedTab === "past-events"
+                    ? "border-b-2 border-blue-500 text-blue-500 font-semibold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setSelectedTab("past-events")}
+              >
+                Past Events
               </button>
             </div>
 
@@ -82,8 +95,8 @@ const ProjectPage = () => {
         {/* Page Content */}
         <div className="mt-24 px-1">
           <div className="md:pt-4 pt-2">
-            {selectedTab === "projects" ? (
-              <AllProjects filter={filter} />
+            {selectedTab === "events" ? (
+              <AllEvents filter={filter} />
             ) : (
               "<UpcomingEvents />"
             )}
@@ -94,4 +107,4 @@ const ProjectPage = () => {
   );
 };
 
-export default ProjectPage;
+export default EventPage;

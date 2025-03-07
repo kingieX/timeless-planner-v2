@@ -19,6 +19,7 @@ export default {
         icon: "#2369f4",
         secondary: "#445B64",
         custom: "#319AB5",
+        special: "#42CEF2",
         priceCard: "#061D3C",
         foreground: "hsl(var(--foreground))",
         card: {

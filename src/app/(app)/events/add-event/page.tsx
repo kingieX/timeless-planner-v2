@@ -18,10 +18,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { RefreshCcw } from "lucide-react";
 import Image from "next/image";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 function AddEventForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const projectId = searchParams.get("projectId") || "";
 
   const [eventName, setEventName] = useState(
     searchParams.get("eventName") || ""
@@ -42,8 +44,22 @@ function AddEventForm() {
   const [endDate, setEndDate] = useState("");
   const [eventLogo, setEventLogo] = useState("");
 
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleCreateEvent = () => {
     // Submit event details logic here
+    setIsOpen(true);
+
+    setIsSuccess(true);
+  };
+
+  const handleAddGuestTag = () => {
+    router.push(`/add-guest-tag/${projectId}`);
+  };
+
+  const handleEventOverview = () => {
+    router.push(`/events/event-overview/${projectId}`);
   };
 
   return (
@@ -225,10 +241,58 @@ function AddEventForm() {
             <Button variant="outline" onClick={() => router.back()}>
               Cancel
             </Button>
-            <Button onClick={handleCreateEvent}>Create Event</Button>
+            <Button
+              onClick={handleCreateEvent}
+              disabled={
+                !eventName ||
+                !eventLocation ||
+                !streetAddress ||
+                !state ||
+                !stateInitial ||
+                !zipCode ||
+                !country ||
+                !startDate ||
+                !endDate ||
+                !startTime ||
+                !endTime
+              }
+            >
+              Create Event
+            </Button>
           </div>
         </div>
       </div>
+
+      {/* Success dialog */}
+      {isSuccess && (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent>
+            <div className="text-center py-4">
+              <div className="bg-primary py-8 rounded-lg">
+                <Image
+                  src="/projects/Macbook.png"
+                  alt="Success"
+                  width={1000}
+                  height={1000}
+                  className="w-1/2 mx-auto"
+                />
+              </div>
+              <h3 className="text-lg font-semibold mt-4">
+                Event successfully added
+              </h3>
+              <p className="text-gray-500 mt-2">
+                you can now add guest tag and team to your event.
+              </p>
+              <div className="flex justify-between gap-2 mt-4">
+                <Button onClick={handleAddGuestTag} variant="outline">
+                  Add guest tag
+                </Button>
+                <Button onClick={handleEventOverview}>Event Overview</Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </DashboardLayout>
   );
 }
