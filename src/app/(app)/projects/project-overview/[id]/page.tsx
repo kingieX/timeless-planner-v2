@@ -9,8 +9,8 @@ import { Project } from "@/types/types"; // Import the correct type
 export default async function ProjectOverview({
   params,
 }: {
-  params: { id: string };
-  // params: Promise<{ id: string }>;
+  // params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const resolvedParams = await params; // Await if params is async
   // console.log("Param", resolvedParams.id);
