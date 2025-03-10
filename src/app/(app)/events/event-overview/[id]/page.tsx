@@ -6,7 +6,8 @@ import { projectData } from "@/data/data"; // Importing centralized data
 export default async function EventOverview({
   params,
 }: {
-  params: { id: string };
+  // params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const resolvedParams = await params; // Await if params is async
   //   console.log("Param", resolvedParams.id);
