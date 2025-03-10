@@ -1,5 +1,4 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import AddEvents from "./AddEvents";
 import {
   Tooltip,
@@ -8,96 +7,16 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ChevronRight, Plus, Printer } from "lucide-react";
+import { projectData } from "@/data/data";
+import { Project } from "@/types/types";
 
-interface Event {
-  id: number;
-  name: string;
-  dueDate: string;
-  eventTime: string;
-  location: string;
-  team: string[];
-  guestTag: number;
-  totalGuest: number;
+interface AllEventsProps {
+  filter: string;
 }
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  createdTime: string;
-  projectDate: string;
-  createdBy: "me" | "shared";
-  events: Event[];
-}
-
-const projectData: Project[] = [
-  {
-    id: 1,
-    title: "Smart Waste Bin",
-    description:
-      "Formal dinner following the wedding ceremony. Includes speeches, toasts, and a live band.",
-    createdTime: "March 1, 2025",
-    projectDate: "March 10, 2025 - March 20, 2025",
-    createdBy: "me",
-    events: [
-      {
-        id: 1,
-        name: "System Deployment",
-        dueDate: "March 12, 2025",
-        eventTime: "10:00 AM",
-        location: "Central City Park",
-        team: ["Alice", "Bob", "Charlie", "David"],
-        guestTag: 4,
-        totalGuest: 100,
-      },
-      {
-        id: 2,
-        name: "Testing & Calibration",
-        dueDate: "March 15, 2025",
-        eventTime: "2:00 PM",
-        location: "Tech Lab",
-        team: ["Emily", "Frank", "Grace"],
-        guestTag: 5,
-        totalGuest: 100,
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Recycling Awareness App",
-    description:
-      "An app to educate users on recycling techniques and how to have a clean environment.",
-    createdTime: "March 5, 2025",
-    projectDate: "March 15, 2025 - March 25, 2025",
-    createdBy: "shared",
-    events: [
-      {
-        id: 3,
-        name: "App Launch",
-        dueDate: "March 16, 2025",
-        eventTime: "11:00 AM",
-        location: "City Hall",
-        team: ["Hannah", "Isaac", "Jack"],
-        guestTag: 2,
-        totalGuest: 100,
-      },
-      {
-        id: 4,
-        name: "Community Engagement Session",
-        dueDate: "March 20, 2025",
-        eventTime: "4:00 PM",
-        location: "Green Park",
-        team: ["Liam", "Mia", "Noah", "Olivia"],
-        guestTag: 1,
-        totalGuest: 120,
-      },
-    ],
-  },
-];
-
-const AllEvents = ({ filter }) => {
+const AllEvents: React.FC<AllEventsProps> = ({ filter }) => {
   const router = useRouter();
-  const [projects] = useState<Project[]>(projectData);
+  const projects: Project[] = projectData.projects;
 
   const filteredProjects = projects.filter((project) => {
     const createdDate = new Date(project.createdTime);
@@ -116,11 +35,11 @@ const AllEvents = ({ filter }) => {
     <div className="mt-4">
       {filteredProjects.length === 0 ? (
         <div className="md:mt-20 mt-12 flex flex-col justify-center items-center">
-          <AddEvents projectData={projectData} />
+          <AddEvents />
         </div>
       ) : (
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full border-collapse border-b rounded-lg overflow-x-aut0 whitespace-nowra">
+          <table className="w-full border-collapse border-b rounded-lg overflow-x-auto whitespace-nowrap">
             <thead className="bg-gray-100">
               <tr>
                 <td className="px-4 text-gray-600 py-4 text-left">Event</td>
@@ -137,11 +56,11 @@ const AllEvents = ({ filter }) => {
             </thead>
             {filteredProjects.map((project) => (
               <tbody key={project.id}>
-                {/* <div key={project.id} className="border rounded-lg p-4 mb-4"> */}
-                {/* <h3 className="font-bold">{project.title}</h3> */}
-
-                {project.events.map((event, index) => (
-                  <tr key={index} className="border-t text-sm hover:bg-gray-50">
+                {project.events.map((event) => (
+                  <tr
+                    key={event.id}
+                    className="border-t text-sm hover:bg-gray-50"
+                  >
                     <td className="flex flex-col p-4">
                       <span
                         onClick={() =>
@@ -175,7 +94,7 @@ const AllEvents = ({ filter }) => {
                             </button>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>add guest tag</p>
+                            <p>Add guest tag</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
@@ -185,7 +104,7 @@ const AllEvents = ({ filter }) => {
                             </button>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>print guest list</p>
+                            <p>Print guest list</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
@@ -197,7 +116,6 @@ const AllEvents = ({ filter }) => {
                     </td>
                   </tr>
                 ))}
-                {/* </div> */}
               </tbody>
             ))}
           </table>

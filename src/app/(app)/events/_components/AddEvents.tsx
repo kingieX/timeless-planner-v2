@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,7 +12,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useRouter } from "next/navigation";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import {
@@ -19,41 +19,23 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  // SelectLabel,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { projectData } from "@/data/data";
+import { Project } from "@/types/types";
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  createdTime: string;
-  projectDate: string;
-}
-
-interface AddEventsProps {
-  //   project: Project;
-  projectData: Project[];
-}
-
-export default function AddEvents({ projectData }: AddEventsProps) {
+export default function AddEvents() {
   const [isOpen, setIsOpen] = useState(false);
   const [eventName, setEventName] = useState("");
   const [selectedProject, setSelectedProject] = useState<string>("");
   const router = useRouter();
 
-  //   const projectId = String(project.id as number);
-
-  // const handleSave = () => {
-  //   router.push("/events/edit-event");
-  // };
-
   const handleContinue = () => {
     const queryParams = new URLSearchParams({
-      eventName: eventName,
-      selectedProject: selectedProject,
-      //   projectId: projectId,
+      eventName,
+      selectedProject,
     }).toString();
     router.push(`/events/add-event?${queryParams}`);
   };
@@ -89,7 +71,7 @@ export default function AddEvents({ projectData }: AddEventsProps) {
 
           {/* Event Name */}
           <div className="flex flex-col gap-2">
-            <label className="">Event Name</label>
+            <label>Event Name</label>
             <Input
               placeholder="Event name"
               value={eventName}
@@ -99,11 +81,8 @@ export default function AddEvents({ projectData }: AddEventsProps) {
 
           {/* Project Selection */}
           <div className="flex flex-col gap-2">
-            <label className="">Project</label>
-            <Select
-              value={selectedProject}
-              onValueChange={(value) => setSelectedProject(value)}
-            >
+            <label>Project</label>
+            <Select value={selectedProject} onValueChange={setSelectedProject}>
               <SelectTrigger className="w-full">
                 <SelectValue
                   className="text-gray-600"
@@ -112,12 +91,18 @@ export default function AddEvents({ projectData }: AddEventsProps) {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {/* <SelectLabel>Select Project</SelectLabel> */}
-                  {projectData.map((proj) => (
-                    <SelectItem key={proj.id} value={proj.title}>
-                      {proj.title}
-                    </SelectItem>
-                  ))}
+                  <SelectLabel>Select project</SelectLabel>
+                  {projectData.projects && projectData.projects.length > 0 ? (
+                    projectData.projects.map((proj: Project) => (
+                      <SelectItem key={proj.id} value={proj.id.toString()}>
+                        {proj.title}
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <p className="px-2 py-1 text-gray-500">
+                      No projects available
+                    </p>
+                  )}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -137,7 +122,10 @@ export default function AddEvents({ projectData }: AddEventsProps) {
             >
               Cancel
             </Button>
-            <Button disabled={!eventName} onClick={handleContinue}>
+            <Button
+              disabled={!eventName || !selectedProject}
+              onClick={handleContinue}
+            >
               Continue
             </Button>
           </div>

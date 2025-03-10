@@ -7,7 +7,7 @@ import AllEvents from "./_components/AllEvents";
 
 const EventPage = () => {
   const [selectedTab, setSelectedTab] = useState("events");
-  const [filter, setFilter] = useState("All Events");
+  const [filter, setFilter] = useState("All events");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // const filterOptions = ["All Events", "Created by me", "Shared with me"];

@@ -22,18 +22,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Project } from "@/types/types";
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  createdTime: string;
-  projectDate: string;
+interface ProjectData {
+  projects: Project[];
 }
 
 interface EmptyEventsProps {
   project: Project;
-  projectData: Project[];
+  projectData: ProjectData;
 }
 
 export default function EmptyEvents({
@@ -45,17 +42,16 @@ export default function EmptyEvents({
   const [selectedProject, setSelectedProject] = useState<string>(project.title);
   const router = useRouter();
 
-  const projectId = String(project.id as number);
+  console.log("project", project);
+  console.log("projectData", projectData);
 
-  // const handleSave = () => {
-  //   router.push("/events/edit-event");
-  // };
+  const projectId = String(project.id);
 
   const handleContinue = () => {
     const queryParams = new URLSearchParams({
-      eventName: eventName,
-      selectedProject: selectedProject,
-      projectId: projectId,
+      eventName,
+      selectedProject,
+      projectId,
     }).toString();
     router.push(`/events/add-event?${queryParams}`);
   };
@@ -111,7 +107,7 @@ export default function EmptyEvents({
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {projectData.map((proj) => (
+                  {projectData.projects?.map((proj) => (
                     <SelectItem key={proj.id} value={proj.title}>
                       {proj.title}
                     </SelectItem>

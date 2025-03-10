@@ -1,16 +1,9 @@
 "use client";
+
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
-
-interface Event {
-  id: number;
-  name: string;
-  dueDate: string;
-  eventTime: string;
-  location: string;
-  team: string[];
-}
+import { Event } from "@/types/types";
 
 interface EventListProps {
   events: Event[];
@@ -21,54 +14,49 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
 
   return (
     <div className="mt-4 overflow-x-auto">
-      <table className="w-full border-collapse border-b rounded-lg overflow-x-aut0 whitespace-nowra">
+      <table className="w-full border-collapse border-b rounded-lg overflow-x-aut whitespace-nowra">
         <thead className="bg-gray-100">
           <tr>
-            <td className="px-4 text-gray-600 py-4 text-left">Event Name</td>
-            <td className="px-4 text-gray-600 py-4 text-left">Due Date</td>
-            <td className="px-4 text-gray-600 py-4 text-left">Event Time</td>
-            <td className="md:table-cell hidden px-4 text-gray-600 py-4 text-left">
+            <th className="px-4 text-gray-600 py-4 text-left">Event Name</th>
+            <th className="px-4 text-gray-600 py-4 text-left">Due Date</th>
+            <th className="px-4 text-gray-600 py-4 text-left">Event Time</th>
+            <th className="md:table-cell hidden px-4 text-gray-600 py-4 text-left">
               Event Location
-            </td>
-            <td className="md:table-cell hidden px-4 text-gray-600 py-2 text-left">
-              Team
-            </td>
-            <td className="px-4 text-gray-600 py-4 text-left"></td>
+            </th>
+            <th className="md:table-cell hidden px-4 text-gray-600 py-2 text-left">
+              Team Members
+            </th>
+            <th className="px-4 text-gray-600 py-4 text-left"></th>
           </tr>
         </thead>
         <tbody>
-          {events.map((event, index) => (
+          {events.map((event) => (
             <tr
-              key={index}
+              key={event.id}
               className="border-t text-sm hover:bg-gray-50 cursor-pointer"
               onClick={() => router.push(`/events/event-overview/${event.id}`)}
             >
-              <td
-                className="px-4 py-4 text-special cursor-pointer hover:underline"
-                onClick={() =>
-                  router.push(`/events/event-overview/${event.id}`)
-                }
-              >
+              <td className="px-4 py-4 text-special cursor-pointer hover:underline">
                 {event.name}
               </td>
-              <td className="px-4 py-4">{event.dueDate}</td>
+              <td className="px-4 py-4">{event.eventDate}</td>
               <td className="px-4 py-4">{event.eventTime}</td>
               <td className="md:table-cell hidden px-4 py-4 text-blue-500">
                 {event.location}
               </td>
               <td className="md:table-cell hidden px-4 py-4">
                 <div className="flex -space-x-2">
-                  {event.team.slice(0, 3).map((member, i) => (
+                  {event.teamMembers.slice(0, 3).map((member) => (
                     <span
-                      key={i}
+                      key={member.id}
                       className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold text-white"
                     >
-                      {member[0]}
+                      {member.name[0]}
                     </span>
                   ))}
-                  {event.team.length > 3 && (
+                  {event.teamMembers.length > 3 && (
                     <span className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
-                      +{event.team.length - 3}
+                      +{event.teamMembers.length - 3}
                     </span>
                   )}
                 </div>
