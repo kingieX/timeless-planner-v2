@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EllipsisVertical } from "lucide-react";
 import { Event } from "@/types/types";
+import EmptyGuestList from "./EmptyGuestList";
+import GuestList from "./GuestList";
 
 interface EventProps {
   event: Event;
@@ -12,6 +14,8 @@ interface EventProps {
 export default function EventOverviewPage({ event }: EventProps) {
   const [activeTab, setActiveTab] = useState("guest-tag");
   //   const hasGuests = event.totalGuest?.length > 0;
+
+  // console.log("event", event.id);
 
   return (
     <div className="py-6 md:px-6 px-4 bg-white">
@@ -59,7 +63,21 @@ export default function EventOverviewPage({ event }: EventProps) {
               </span>
             )}
           </div>
-          <p className="text-gray-800">{event.teamLead}</p>
+          {/* <p className="text-gray-800">{event.teamLead}</p> */}
+          {/* Team Lead (Profile Style) */}
+          <div className="flex items-center gap-2">
+            {event.teamLead.length > 0 ? (
+              <>
+                <span className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs font-bold text-white">
+                  {event.teamLead[0].name[0]}{" "}
+                  {/* Display first letter of first team lead */}
+                </span>
+                <p className="text-red-700">{event.teamLead[0].email}</p>
+              </>
+            ) : (
+              <p className="text-gray-500">No team lead assigned</p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -80,13 +98,16 @@ export default function EventOverviewPage({ event }: EventProps) {
           </div>
 
           {/* Guest Tag Content */}
-          {/* <TabsContent value="guest-tag">
-            {event.totalGuest > 0 ? (
-              <GuestList guests={event.guestTag} />
+          <TabsContent value="guest-tag">
+            {event.guestTag.length > 0 &&
+            event.guestTag.some((tag) => tag.guests.length > 0) ? (
+              <GuestList event={event} />
             ) : (
-              <EmptyGuestList />
+              <div className="flex justify-center items-center py-8">
+                <EmptyGuestList event={event} />
+              </div>
             )}
-          </TabsContent> */}
+          </TabsContent>
 
           {/* Other Tabs Content */}
           <TabsContent value="team-chat">{/* <TeamChat /> */}</TabsContent>

@@ -75,11 +75,15 @@ const AllEvents: React.FC<AllEventsProps> = ({ filter }) => {
                       </span>
                     </td>
                     <td className="md:table-cell hidden p-4">
-                      {event.guestTag}
+                      {event.guestTag.map((tag) => tag.name).join(", ")}
                     </td>
                     <td className="md:table-cell hidden p-4">
-                      {event.totalGuest}
+                      {event.guestTag.reduce(
+                        (total, tag) => total + tag.guests.length,
+                        0
+                      )}
                     </td>
+
                     <td className="md:table-cell hidden p-4">
                       <button className="block text-center border border-primary text-gray-800 py-2 px-4 rounded-lg hover:bg-primary hover:text-white transition">
                         Add Guest
