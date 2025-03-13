@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -36,14 +36,19 @@ export default function EmptyGuestList({ event }: EmptyGuestListProps) {
   const [selectedEvent, setSelectedEvent] = useState<string>(event.name);
   //   console.log("Current event:", event.name);
 
+  const eventId = String(event.id);
+
   const router = useRouter();
 
   const handleContinue = () => {
-    const queryParams = new URLSearchParams({
-      guestListTag,
-      selectedEvent,
-    }).toString();
-    router.push(`/events/add-event?${queryParams}`);
+    // const queryParams = new URLSearchParams({
+    //   guestListTag,
+    //   selectedEvent,
+    //   eventId,
+    // }).toString();
+    // router.push(`/events/event-overview/AddguestTag?${queryParams}`);
+    router.push(`/events/event-overview/${eventId}`);
+    setIsOpen(false);
   };
 
   return (
@@ -78,11 +83,28 @@ export default function EmptyGuestList({ event }: EmptyGuestListProps) {
           {/* Guest list tag */}
           <div className="flex flex-col gap-2">
             <label>Guest list tag</label>
-            <Input
+            {/* <Input
               placeholder="Event name"
               value={guestListTag}
               onChange={(e) => setGuestListTag(e.target.value)}
-            />
+            /> */}
+            <Select
+              value={guestListTag}
+              onValueChange={(value) => setGuestListTag(value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Guest list tag" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="vip-guests">VIP guests</SelectItem>
+                <SelectItem value="family-guests">Family guests</SelectItem>
+                <SelectItem value="business-partners">
+                  Business partners
+                </SelectItem>
+                <SelectItem value="guest-speakers">Guest Speakers</SelectItem>
+                <SelectItem value="other-attendees">Other attendees</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Event Selection */}

@@ -43,7 +43,7 @@ export const projectData: ProjectData = {
                   color: "#FF5733",
                   externalLink: "http://example.com",
                   RSVP: true,
-                  checkedIn: false,
+                  checkedIn: true,
                   imageUrl: "http://example.com/image.jpg",
                   affiliation: "Tech Corp",
                   secondaryEmail: "johndoe@work.com",
