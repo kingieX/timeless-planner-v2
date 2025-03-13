@@ -3,10 +3,10 @@ import DashboardLayout from "@/app/(app)/dashboard/layout";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { AddGuestManually } from "./_components/AddGuestManually";
 
-export default function AddGuestPage() {
+function AddGuestForm() {
   const [activeTab, setActiveTab] = useState("add-guest-manually");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -91,5 +91,13 @@ export default function AddGuestPage() {
         </div>
       </div>
     </DashboardLayout>
+  );
+}
+
+export default function AddGuestPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AddGuestForm />
+    </Suspense>
   );
 }
