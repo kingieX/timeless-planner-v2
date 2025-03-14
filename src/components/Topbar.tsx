@@ -1,23 +1,37 @@
 "use client";
 
-// import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Bell, UserRound } from "lucide-react";
 import Image from "next/image";
+import { Button } from "./ui/button";
+import CreateProjectDialog from "@/app/(app)/_components/dialogs/CreateProjectDialog";
 
 export default function Topbar() {
-  //   const pathname = usePathname();
+  const pathname = usePathname();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Define titles for each page
-  //   const pageTitles: { [key: string]: string } = {
-  //     "/dashboard": "Dashboard",
-  //     "/bin-status": "Waste Bin Status",
-  //     "/map": "Map View",
-  //     "/history": "History & Reports",
-  //     "/settings": "Settings",
-  //   };
+  // Define button actions per page
+  const buttonConfig: Record<string, { label: string; action: () => void }> = {
+    "/dashboard": {
+      label: "Create Project",
+      action: () => setIsDialogOpen(true),
+    },
+    "/guests": {
+      label: "Add Guest",
+      action: () => console.log("Add Guest Clicked"),
+    },
+    "/check-in": {
+      label: "Check-in Guest",
+      action: () => console.log("Check-in Clicked"),
+    },
+  };
 
-  // Get the current page title, default to "Dashboard" if not found
-  //   const currentTitle = pageTitles[pathname] || "Dashboard";
+  // Get button details
+  const buttonDetails = buttonConfig[pathname] || {
+    label: "Action",
+    action: () => {},
+  };
 
   return (
     <div className="bg-white w-full flex fixed z-40 justify-between items-center px-6 py-2">
@@ -31,18 +45,30 @@ export default function Topbar() {
         />
         <span className="md:text-lg font-semibold">Timeless Planner</span>
       </div>
-      <div></div>
+
       <div className="flex items-center space-x-4">
+        <Button
+          variant="outline"
+          className="md:mr-8 px-4"
+          onClick={buttonDetails.action}
+        >
+          {buttonDetails.label}
+        </Button>
+
         <button className="relative">
           <Bell size={24} className="text-secondary hover:text-primary" />
           <span className="absolute -top-2 -right-1 bg-primary text-white text-xs w-4 rounded-full">
             3
           </span>
         </button>
+
         <div className="flex justify-center items-center bg-gray-100 rounded-full p-2">
           <UserRound size={16} className="text-secondary" />
         </div>
       </div>
+
+      {/* Create Project Dialog */}
+      <CreateProjectDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </div>
   );
 }
