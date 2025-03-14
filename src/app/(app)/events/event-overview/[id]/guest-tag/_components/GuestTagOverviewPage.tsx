@@ -5,6 +5,8 @@ import { useState } from "react";
 import AllGuests from "./AllGuests";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import CheckedIn from "./CheckedIn";
+import PendingCheckedIn from "./PendingCheckedIn";
 
 interface GuestTagProps {
   guestTag: GuestTag;
@@ -12,6 +14,15 @@ interface GuestTagProps {
 
 export default function GuestTagOverviewPage({ guestTag }: GuestTagProps) {
   const [activeTab, setActiveTab] = useState("all-guests");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Function to filter guests based on search query
+  const filteredGuests = guestTag.guests.filter((guest) =>
+    [guest.name, guest.id, guest.affiliation].some(
+      (field) =>
+        field && field.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  );
 
   return (
     <div className="py-6 space-y-8 bg-white">
@@ -69,19 +80,25 @@ export default function GuestTagOverviewPage({ guestTag }: GuestTagProps) {
             <Search size={20} className="absolute top-2 left-2" />
             <Input
               type="text"
-              placeholder="search name, id or affiliation"
+              placeholder="Search name, ID, or affiliation"
               className="text-gray-800 pl-8 py-3"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
 
           {/* Tabs Content */}
           <div className="py-">
             <TabsContent value="all-guests">
-              <AllGuests />
+              <AllGuests guestTag={{ ...guestTag, guests: filteredGuests }} />
             </TabsContent>
-            <TabsContent value="check-in">{/* <Team /> */}</TabsContent>
+            <TabsContent value="check-in">
+              <CheckedIn guestTag={{ ...guestTag, guests: filteredGuests }} />
+            </TabsContent>
             <TabsContent value="pending-check-ins">
-              {/* <Vendors /> */}
+              <PendingCheckedIn
+                guestTag={{ ...guestTag, guests: filteredGuests }}
+              />
             </TabsContent>
           </div>
         </Tabs>

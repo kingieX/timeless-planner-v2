@@ -1,13 +1,19 @@
 import { ChevronRight } from "lucide-react";
 
-export default function AllGuests({ guestTag }) {
-  // console.log("guestTag: ", guestTag);
+export default function CheckedIn({ guestTag }) {
+  //   console.log("guestTag: ", guestTag);
+
+  // Filter guests who have checked in
+  const checkedInGuests = guestTag.guests.filter(
+    (guest) => guest.checkedIn === true
+  );
 
   return (
     <div className="mt-4 overflow-x-auto md:mr-8">
-      {guestTag.guests.length === 0 ? (
+      {/* Show message if no guests have checked in */}
+      {checkedInGuests.length === 0 ? (
         <p className="italic text-gray-600 text-center py-6">
-          Guest not found...
+          Checked in guest not found...
         </p>
       ) : (
         <table className="w-full border-collapse border-b rounded-lg overflow-x-auto whitespace-nowrap">
@@ -26,7 +32,7 @@ export default function AllGuests({ guestTag }) {
             </tr>
           </thead>
           <tbody>
-            {guestTag.guests.map((guest) => (
+            {checkedInGuests.map((guest) => (
               <tr key={guest.id} className="border-t text-sm hover:bg-gray-50">
                 <td className="md:table-cell hidden p-4">{guestTag.name}</td>
                 <td className="flex flex-col p-4">
@@ -44,15 +50,9 @@ export default function AllGuests({ guestTag }) {
                   {guest.RSVP === true ? "Attending" : "Not attending"}
                 </td>
                 <td>
-                  {guest.checkedIn === true ? (
-                    <span className="p-1 bg-green-100 text-green-600">
-                      Checked in
-                    </span>
-                  ) : (
-                    <span className="px-1 bg-gray-100 rounded-sm ml-4 text-lg">
-                      -
-                    </span>
-                  )}
+                  <span className="p-1 bg-green-100 text-green-600">
+                    Checked in
+                  </span>
                 </td>
                 <td className="md:table-cell hidden">
                   <div className="flex justify-center">
