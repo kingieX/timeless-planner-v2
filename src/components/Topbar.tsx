@@ -1,21 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Bell, UserRound } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import CreateProjectDialog from "@/app/(app)/_components/dialogs/CreateProjectDialog";
+import AddEventDialog from "@/app/(app)/_components/dialogs/AddEventDialog";
 
 export default function Topbar() {
   const pathname = usePathname();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Define button actions per page
-  const buttonConfig: Record<string, { label: string; action: () => void }> = {
+  const buttonConfig: Record<
+    string,
+    { label: string; action: () => void; dialog?: JSX.Element }
+  > = {
     "/dashboard": {
       label: "Create Project",
       action: () => setIsDialogOpen(true),
+      dialog: (
+        <CreateProjectDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+        />
+      ),
+    },
+    "/projects": {
+      label: "Create Project",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <CreateProjectDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+        />
+      ),
     },
     "/guests": {
       label: "Add Guest",
@@ -26,6 +46,17 @@ export default function Topbar() {
       action: () => console.log("Check-in Clicked"),
     },
   };
+
+  // Check if we are in project overview page
+  if (pathname.startsWith("/projects/project-overview/")) {
+    buttonConfig[pathname] = {
+      label: "Add Event",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <AddEventDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      ),
+    };
+  }
 
   // Get button details
   const buttonDetails = buttonConfig[pathname] || {
@@ -67,8 +98,8 @@ export default function Topbar() {
         </div>
       </div>
 
-      {/* Create Project Dialog */}
-      <CreateProjectDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      {/* Dynamic Dialog Rendering */}
+      {buttonDetails.dialog || null}
     </div>
   );
 }

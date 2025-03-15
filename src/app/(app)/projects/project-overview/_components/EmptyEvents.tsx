@@ -75,7 +75,7 @@ export default function EmptyEvents({
         className="w-full block text-center bg-primary text-white py-2 mx-4 rounded-lg hover:bg-opacity-80 transition mt-4"
         onClick={() => setIsOpen(true)}
       >
-        Create Event
+        Add event
       </Button>
 
       {/* Create Event Modal */}
