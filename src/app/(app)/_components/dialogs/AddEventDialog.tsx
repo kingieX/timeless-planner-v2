@@ -20,24 +20,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { Project } from "@/types/types";
+import { Project } from "@/types/types";
 import { projectData } from "@/data/data";
 
 interface AddEventDialogProps {
   isOpen: boolean;
   // setIsOpen: () => void;
   setIsOpen: (value: boolean) => void;
-  // project: Project;
+  project: Project;
   // projectData: { projects: Project[] };
 }
 
 export default function AddEventDialog({
   isOpen,
   setIsOpen,
+  project,
 }: //   projectData,
 AddEventDialogProps) {
+  // console.log("project on AddEventDialog: ", project);
+
   const [eventName, setEventName] = useState("");
-  const [selectedProject, setSelectedProject] = useState("");
+  const [selectedProject, setSelectedProject] = useState<string>(project.title);
   const router = useRouter();
 
   const handleContinue = () => {
@@ -74,7 +77,8 @@ AddEventDialogProps) {
           <label className="">Project</label>
           <Select
             value={selectedProject}
-            onValueChange={(value) => setSelectedProject(value)}
+            // onValueChange={(value) => setSelectedProject(value)}
+            onValueChange={setSelectedProject}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a project" />

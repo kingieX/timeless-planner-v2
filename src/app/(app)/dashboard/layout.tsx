@@ -1,15 +1,11 @@
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-// import NotificationPopup from "@/components/NotificationPopup";
-// import { NotificationProvider } from "@/context/NotificationContext";
-
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    // <NotificationProvider>
     <div className="flex">
       <div className="overflow-y-auto max-h-screen">
         <Sidebar />
@@ -19,7 +15,5 @@ export default function DashboardLayout({
         <main className="p-6">{children}</main>
       </div>
     </div>
-    //   <NotificationPopup />
-    // </NotificationProvider>
   );
 }

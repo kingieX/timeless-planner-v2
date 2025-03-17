@@ -7,8 +7,13 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import CreateProjectDialog from "@/app/(app)/_components/dialogs/CreateProjectDialog";
 import AddEventDialog from "@/app/(app)/_components/dialogs/AddEventDialog";
+import { useProject } from "@/context/ProjectContext";
+import { Project } from "@/types/types";
 
 export default function Topbar() {
+  const { project } = useProject();
+  // console.log("project on Topbar: ", project);
+
   const pathname = usePathname();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -53,7 +58,12 @@ export default function Topbar() {
       label: "Add Event",
       action: () => setIsDialogOpen(true),
       dialog: (
-        <AddEventDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+        <AddEventDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+          // project={project}
+          project={project as Project} // Type assertion//+
+        />
       ),
     };
   }
