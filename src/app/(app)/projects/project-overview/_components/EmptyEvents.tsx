@@ -42,8 +42,8 @@ export default function EmptyEvents({
   const [selectedProject, setSelectedProject] = useState<string>(project.title);
   const router = useRouter();
 
-  console.log("project", project);
-  console.log("projectData", projectData);
+  // console.log("project", project);
+  // console.log("projectData", projectData);
 
   const projectId = String(project.id);
 

@@ -20,32 +20,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Project } from "@/types/types";
+// import { Project } from "@/types/types";
 import { projectData } from "@/data/data";
 
 interface AddEventDialogProps {
   isOpen: boolean;
-  setIsOpen: () => void;
-  project: Project;
-  projectData: { projects: Project[] };
+  // setIsOpen: () => void;
+  setIsOpen: (value: boolean) => void;
+  // project: Project;
+  // projectData: { projects: Project[] };
 }
 
 export default function AddEventDialog({
   isOpen,
   setIsOpen,
-  project,
 }: //   projectData,
 AddEventDialogProps) {
   const [eventName, setEventName] = useState("");
-  const [selectedProject, setSelectedProject] = useState<string>("");
+  const [selectedProject, setSelectedProject] = useState("");
   const router = useRouter();
 
   const handleContinue = () => {
     const queryParams = new URLSearchParams({
       eventName,
       selectedProject,
-      projectId: String(project.id),
+      // projectId: String(project.id),
     }).toString();
+
+    console.log("Query Params: ", queryParams);
+
     router.push(`/events/add-event?${queryParams}`);
   };
 
@@ -98,11 +101,15 @@ AddEventDialogProps) {
           <Button
             className="text-primary"
             variant="outline"
-            onClick={setIsOpen}
+            onClick={() => setIsOpen(false)}
           >
             Cancel
           </Button>
-          <Button disabled={!eventName} onClick={handleContinue}>
+
+          <Button
+            disabled={!eventName || !selectedProject}
+            onClick={handleContinue}
+          >
             Continue
           </Button>
         </div>
