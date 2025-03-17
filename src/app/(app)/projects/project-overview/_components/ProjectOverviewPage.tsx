@@ -71,7 +71,7 @@ export default function ProjectOverviewPage({ project }: ProjectProps) {
             </div>
           </div>
 
-          {project.events.length < 0 ? (
+          {project.events.length > 0 ? (
             <div className="overflow-x-auto">
               <EventList events={project.events} />
             </div>

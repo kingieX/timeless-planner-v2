@@ -17,6 +17,9 @@ export default function Topbar() {
   const pathname = usePathname();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  if (!project) {
+    return;
+  }
   // Define button actions per page
   const buttonConfig: Record<
     string,

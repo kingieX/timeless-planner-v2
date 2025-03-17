@@ -40,7 +40,9 @@ AddEventDialogProps) {
   // console.log("project on AddEventDialog: ", project);
 
   const [eventName, setEventName] = useState("");
-  const [selectedProject, setSelectedProject] = useState<string>(project.title);
+  const [selectedProject, setSelectedProject] = useState<string>(
+    project.title || ""
+  );
   const router = useRouter();
 
   const handleContinue = () => {

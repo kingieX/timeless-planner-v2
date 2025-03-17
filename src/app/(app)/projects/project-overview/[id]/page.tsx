@@ -11,7 +11,7 @@ export default async function ProjectOverview({
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = await params; // Await if params is async
-  console.log("Param", resolvedParams.id);
+  // console.log("Param", resolvedParams.id);
 
   const project: Project | undefined = projectData.projects.find(
     (proj) => proj.id === resolvedParams.id
