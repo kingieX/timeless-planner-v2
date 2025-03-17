@@ -71,6 +71,32 @@ export default function Topbar() {
     };
   }
 
+  // check if we have event overview page
+  if (pathname.startsWith("/events/event-overview/")) {
+    buttonConfig[pathname] = {
+      label: "Add guest tag",
+      action: () => console.log("Add Guest Clicked"),
+    };
+  }
+
+  // check if we have add guest tag page
+  if (pathname.startsWith("/add-guest-tag/")) {
+    buttonConfig[pathname] = {
+      label: "Add Guest",
+      action: () => console.log("Add Guest Clicked"),
+    };
+  }
+
+  // check if we have check-in page
+  if (pathname.startsWith("/check-in/")) {
+    buttonConfig[pathname] = {
+      label: "Check-in Guest",
+      action: () => console.log("Check-in Clicked"),
+    };
+  }
+
+  // check if we have add event page
+
   // Get button details
   const buttonDetails = buttonConfig[pathname] || {
     label: "Action",

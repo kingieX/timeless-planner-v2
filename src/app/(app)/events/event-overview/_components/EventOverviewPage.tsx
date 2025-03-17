@@ -99,7 +99,7 @@ export default function EventOverviewPage({ event }: EventProps) {
 
           {/* Guest Tag Content */}
           <TabsContent value="guest-tag">
-            {event.guestTag.length > 0 &&
+            {event.guestTag.length < 0 &&
             event.guestTag.some((tag) => tag.guests.length > 0) ? (
               <GuestList event={event} />
             ) : (
