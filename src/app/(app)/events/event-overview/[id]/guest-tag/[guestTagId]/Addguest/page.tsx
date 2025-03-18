@@ -1,22 +1,44 @@
 "use client";
-import DashboardLayout from "@/app/(app)/dashboard/layout";
 
+import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { Suspense, useMemo, useState } from "react";
 import { AddGuestManually } from "./_components/AddGuestManually";
+
+import { projectData } from "@/data/data";
 
 function AddGuestForm() {
   const [activeTab, setActiveTab] = useState("add-guest-manually");
-  const searchParams = useSearchParams();
+  const params = useParams();
   const router = useRouter();
 
-  const guestTag = searchParams.get("guestListTag");
-  const eventName = searchParams.get("selectedEvent");
-  const eventId = searchParams.get("eventId");
+  const eventId = params?.id as string;
+  const guestTagId = params?.guestTagId as string;
+
+  // Updated event and guest tag lookup
+  const { eventName, guestTagName } = useMemo(() => {
+    let eventName = "";
+    let guestTagName = "";
+
+    // Search through all projects and their events
+    for (const project of projectData.projects) {
+      const event = project.events.find((ev) => ev.id === eventId);
+      if (event) {
+        eventName = event.name;
+        const guestTag = event.guestTag.find((tag) => tag.id === guestTagId);
+        if (guestTag) {
+          guestTagName = guestTag.name;
+        }
+        break; // Stop once found
+      }
+    }
+
+    return { eventName, guestTagName };
+  }, [eventId, guestTagId]);
 
   const handleBack = () => {
-    router.push(`/events/event-overview/${eventId}`);
+    router.push(`/events/event-overview/${eventId}/guest-tag/${guestTagId}`);
   };
 
   return (
@@ -28,16 +50,15 @@ function AddGuestForm() {
               onClick={handleBack}
               className="hover:underline hover:text-primary cursor-pointer"
             >
-              {eventName}
+              {eventName || "Event"}
             </span>{" "}
-            &gt; <span>{guestTag}</span>
+            &gt; <span>{guestTagName || "Guest Tag"}</span>
           </h2>
         </div>
 
         <div className="w-full flex flex-col justify-center">
-          {/* Tabs Navigation */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="">
-            <div className="w-full max-w-6xl bg-white pb-4 fixed z-10 flex items-center mt-8 ">
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <div className="w-full max-w-6xl bg-white pb-4 fixed z-10 flex items-center mt-8">
               <TabsList className="flex space-x-6 border-b">
                 <TabsTrigger
                   value="add-guest-manually"
@@ -46,11 +67,9 @@ function AddGuestForm() {
                       ? "border-b-2 border-primary text-primary"
                       : ""
                   }`}
-                  onClick={() => setActiveTab("add-guest-manually")}
                 >
                   Add guest manually
                 </TabsTrigger>
-
                 <TabsTrigger
                   value="upload-csv"
                   className={`pb-2 text-gray-600 rounded-none ${
@@ -58,11 +77,9 @@ function AddGuestForm() {
                       ? "border-b-2 border-primary text-primary"
                       : ""
                   }`}
-                  onClick={() => setActiveTab("upload-csv")}
                 >
                   Upload CSV
                 </TabsTrigger>
-
                 <TabsTrigger
                   value="get-form-link"
                   className={`pb-2 text-gray-600 rounded-none ${
@@ -70,21 +87,21 @@ function AddGuestForm() {
                       ? "border-b-2 border-primary text-primary"
                       : ""
                   }`}
-                  onClick={() => setActiveTab("get-form-link")}
                 >
                   Get form link
                 </TabsTrigger>
               </TabsList>
             </div>
 
-            {/* Tabs Content */}
             <div className="py-4 mt-16">
               <TabsContent value="add-guest-manually">
                 <AddGuestManually />
               </TabsContent>
-              <TabsContent value="upload-csv">{/* <Team /> */}</TabsContent>
+              <TabsContent value="upload-csv">
+                {/* Upload CSV Section */}
+              </TabsContent>
               <TabsContent value="get-form-link">
-                {/* <Vendors /> */}
+                {/* Form link section */}
               </TabsContent>
             </div>
           </Tabs>

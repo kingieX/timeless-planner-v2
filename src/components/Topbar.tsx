@@ -1,27 +1,23 @@
 "use client";
 
 import { JSX, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Bell, UserRound } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import CreateProjectDialog from "@/app/(app)/_components/dialogs/CreateProjectDialog";
 import AddEventDialog from "@/app/(app)/_components/dialogs/AddEventDialog";
+import AddGuestTagDialog from "@/app/(app)/_components/dialogs/AddGuestTagDialog";
 import { useProject } from "@/context/ProjectContext";
 import { Project, Event } from "@/types/types";
-import AddGuestTagDialog from "@/app/(app)/_components/dialogs/AddGuestTagDialog";
 
 export default function Topbar() {
-  const { project, event } = useProject();
-  console.log("event on Topbar: ", event);
-
+  const { project, event, guestTag } = useProject();
   const pathname = usePathname();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
 
-  if (!project || !event) {
-    return <p className="hidden">loading...</p>;
-  }
-  // Define button actions per page
+  // Define default button actions per page
   const buttonConfig: Record<
     string,
     { label: string; action: () => void; dialog?: JSX.Element }
@@ -52,8 +48,8 @@ export default function Topbar() {
     },
   };
 
-  // Check if we are in project overview page
-  if (pathname.startsWith("/projects/project-overview/")) {
+  // Project Overview Page Button
+  if (pathname.startsWith("/projects/project-overview/") && project) {
     buttonConfig[pathname] = {
       label: "Add Event",
       action: () => setIsDialogOpen(true),
@@ -61,15 +57,15 @@ export default function Topbar() {
         <AddEventDialog
           isOpen={isDialogOpen}
           setIsOpen={setIsDialogOpen}
-          // project={project}
-          project={project as Project} // Type assertion//+
+          project={project as Project}
         />
       ),
     };
   }
 
-  // check if we have event overview page
-  if (pathname.startsWith("/events/event-overview/")) {
+  // Event Overview Page Button
+  const eventId = event?.id;
+  if (pathname.includes(`/events/event-overview/${eventId}`) && event) {
     buttonConfig[pathname] = {
       label: "Add guest tag",
       action: () => setIsDialogOpen(true),
@@ -83,15 +79,18 @@ export default function Topbar() {
     };
   }
 
-  // check if we have add guest tag page
-  if (pathname.startsWith("/add-guest-tag/")) {
+  // Guest Tag Page Button
+  if (pathname.includes(`/guest-tag/${guestTag?.id}`) && guestTag) {
     buttonConfig[pathname] = {
       label: "Add Guest",
-      action: () => console.log("Add Guest Clicked"),
+      action: () =>
+        router.push(
+          `/events/event-overview/${event?.id}/guest-tag/${guestTag.id}/Addguest`
+        ),
     };
   }
 
-  // check if we have check-in page
+  // Check-in page override
   if (pathname.startsWith("/check-in/")) {
     buttonConfig[pathname] = {
       label: "Check-in Guest",
@@ -99,13 +98,11 @@ export default function Topbar() {
     };
   }
 
-  // check if we have add event page
-
-  // Get button details
-  const buttonDetails = buttonConfig[pathname] || {
-    label: "Action",
-    action: () => {},
-  };
+  const buttonDetails = buttonConfig[pathname] || "";
+  // {
+  //   label: "Action",
+  //   action: () => {},
+  // };
 
   return (
     <div className="bg-white w-full flex fixed z-40 justify-between items-center px-6 py-2">

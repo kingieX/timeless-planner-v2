@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-import { Event, Project } from "@/types/types";
+import { Event, GuestTag, Project } from "@/types/types";
 
 // Define context type
 interface ProjectContextType {
@@ -9,6 +9,8 @@ interface ProjectContextType {
   setProject: (project: Project) => void;
   event: Event | null;
   setEvent: (event: Event) => void;
+  guestTag: GuestTag | null;
+  setGuestTag: (guestTag: GuestTag) => void;
 }
 
 // Create Context
@@ -17,9 +19,12 @@ const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 export function ProjectProvider({ children }: { children: ReactNode }) {
   const [project, setProject] = useState<Project | null>(null);
   const [event, setEvent] = useState<Event | null>(null);
+  const [guestTag, setGuestTag] = useState<GuestTag | null>(null);
 
   return (
-    <ProjectContext.Provider value={{ project, setProject, event, setEvent }}>
+    <ProjectContext.Provider
+      value={{ project, setProject, event, setEvent, guestTag, setGuestTag }}
+    >
       {children}
     </ProjectContext.Provider>
   );

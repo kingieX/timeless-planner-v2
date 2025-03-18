@@ -1,12 +1,13 @@
 "use client";
 import { GuestTag } from "@/types/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AllGuests from "./AllGuests";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import CheckedIn from "./CheckedIn";
 import PendingCheckedIn from "./PendingCheckedIn";
+import { useProject } from "@/context/ProjectContext";
 
 interface GuestTagProps {
   guestTag: GuestTag;
@@ -16,6 +17,10 @@ export default function GuestTagOverviewPage({ guestTag }: GuestTagProps) {
   const [activeTab, setActiveTab] = useState("all-guests");
   const [searchQuery, setSearchQuery] = useState("");
 
+  console.log("Guest Tag: ", guestTag);
+
+  const { setGuestTag } = useProject();
+
   // Function to filter guests based on search query
   const filteredGuests = guestTag.guests.filter((guest) =>
     [guest.name, guest.id, guest.affiliation].some(
@@ -23,6 +28,10 @@ export default function GuestTagOverviewPage({ guestTag }: GuestTagProps) {
         field && field.toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
+
+  useEffect(() => {
+    setGuestTag(guestTag); // Set project in context
+  }, [guestTag, setGuestTag]);
 
   return (
     <div className="py-6 space-y-8 bg-white">
