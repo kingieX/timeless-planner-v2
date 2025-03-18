@@ -8,6 +8,7 @@ import { Search } from "lucide-react";
 import CheckedIn from "./CheckedIn";
 import PendingCheckedIn from "./PendingCheckedIn";
 import { useProject } from "@/context/ProjectContext";
+import { useParams } from "next/navigation";
 
 interface GuestTagProps {
   guestTag: GuestTag;
@@ -16,8 +17,10 @@ interface GuestTagProps {
 export default function GuestTagOverviewPage({ guestTag }: GuestTagProps) {
   const [activeTab, setActiveTab] = useState("all-guests");
   const [searchQuery, setSearchQuery] = useState("");
+  const params = useParams();
+  const eventId = params?.id;
 
-  console.log("Guest Tag: ", guestTag);
+  // console.log("Guest Tag: ", guestTag);
 
   const { setGuestTag } = useProject();
 
@@ -99,7 +102,10 @@ export default function GuestTagOverviewPage({ guestTag }: GuestTagProps) {
           {/* Tabs Content */}
           <div className="py-">
             <TabsContent value="all-guests">
-              <AllGuests guestTag={{ ...guestTag, guests: filteredGuests }} />
+              <AllGuests
+                guestTag={{ ...guestTag, guests: filteredGuests }}
+                eventId={eventId}
+              />
             </TabsContent>
             <TabsContent value="check-in">
               <CheckedIn guestTag={{ ...guestTag, guests: filteredGuests }} />

@@ -1,7 +1,9 @@
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export default function AllGuests({ guestTag }) {
+export default function AllGuests({ guestTag, eventId }) {
   // console.log("guestTag: ", guestTag);
+  const router = useRouter();
 
   return (
     <div className="mt-4 overflow-x-auto md:mr-8">
@@ -27,10 +29,25 @@ export default function AllGuests({ guestTag }) {
           </thead>
           <tbody>
             {guestTag.guests.map((guest) => (
-              <tr key={guest.id} className="border-t text-sm hover:bg-gray-50">
+              <tr
+                key={guest.id}
+                className="border-t text-sm hover:bg-gray-50 cursor-pointer"
+                onClick={() =>
+                  router.push(
+                    `/events/event-overview/${eventId}/guest-tag/${guestTag.id}/guest/${guest.id}`
+                  )
+                }
+              >
                 <td className="md:table-cell hidden p-4">{guestTag.name}</td>
                 <td className="flex flex-col p-4">
-                  <span className="cursor-pointer hover:underline hover:text-primary">
+                  <span
+                    className="cursor-pointer hover:underline hover:text-primary"
+                    onClick={() =>
+                      router.push(
+                        `/events/event-overview/${eventId}/guest-tag/${guestTag.id}/guest/${guest.id}`
+                      )
+                    }
+                  >
                     {guest.name}
                   </span>
                   <span className="text-xs text-gray-600 font-light">

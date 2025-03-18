@@ -42,6 +42,17 @@ export default function Topbar() {
         />
       ),
     },
+    "/events": {
+      label: "Add Event",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <AddEventDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+          project={project as Project}
+        />
+      ),
+    },
     "/check-in": {
       label: "Check-in Guest",
       action: () => console.log("Check-in Clicked"),
@@ -90,6 +101,16 @@ export default function Topbar() {
     };
   }
 
+  if (pathname.includes("/Addguest") && guestTag) {
+    buttonConfig[pathname] = {
+      label: "",
+      action: () =>
+        router.push(
+          `/events/event-overview/${event?.id}/guest-tag/${guestTag.id}/Addguest`
+        ),
+    };
+  }
+
   // Check-in page override
   if (pathname.startsWith("/check-in/")) {
     buttonConfig[pathname] = {
@@ -118,13 +139,15 @@ export default function Topbar() {
       </div>
 
       <div className="flex items-center space-x-4">
-        <Button
-          variant="outline"
-          className="md:mr-8 px-4"
-          onClick={buttonDetails.action}
-        >
-          {buttonDetails.label}
-        </Button>
+        {buttonDetails && buttonDetails.label && (
+          <Button
+            variant="outline"
+            className="md:mr-8 px-4"
+            onClick={buttonDetails.action}
+          >
+            {buttonDetails.label}
+          </Button>
+        )}
 
         <button className="relative">
           <Bell size={24} className="text-secondary hover:text-primary" />
