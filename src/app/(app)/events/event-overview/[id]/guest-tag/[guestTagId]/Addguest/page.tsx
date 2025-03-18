@@ -7,6 +7,7 @@ import { Suspense, useMemo, useState } from "react";
 import { AddGuestManually } from "./_components/AddGuestManually";
 
 import { projectData } from "@/data/data";
+import UploadCSV from "./_components/UploadCSV";
 
 function AddGuestForm() {
   const [activeTab, setActiveTab] = useState("add-guest-manually");
@@ -99,9 +100,11 @@ function AddGuestForm() {
               </TabsContent>
               <TabsContent value="upload-csv">
                 {/* Upload CSV Section */}
+                <UploadCSV />
               </TabsContent>
               <TabsContent value="get-form-link">
                 {/* Form link section */}
+                {/* <FormLink /> */}
               </TabsContent>
             </div>
           </Tabs>
