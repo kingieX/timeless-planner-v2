@@ -8,17 +8,18 @@ import { Button } from "./ui/button";
 import CreateProjectDialog from "@/app/(app)/_components/dialogs/CreateProjectDialog";
 import AddEventDialog from "@/app/(app)/_components/dialogs/AddEventDialog";
 import { useProject } from "@/context/ProjectContext";
-import { Project } from "@/types/types";
+import { Project, Event } from "@/types/types";
+import AddGuestTagDialog from "@/app/(app)/_components/dialogs/AddGuestTagDialog";
 
 export default function Topbar() {
-  const { project } = useProject();
-  // console.log("project on Topbar: ", project);
+  const { project, event } = useProject();
+  console.log("event on Topbar: ", event);
 
   const pathname = usePathname();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  if (!project) {
-    return;
+  if (!project || !event) {
+    return <p className="hidden">loading...</p>;
   }
   // Define button actions per page
   const buttonConfig: Record<
@@ -44,10 +45,6 @@ export default function Topbar() {
           setIsOpen={setIsDialogOpen}
         />
       ),
-    },
-    "/guests": {
-      label: "Add Guest",
-      action: () => console.log("Add Guest Clicked"),
     },
     "/check-in": {
       label: "Check-in Guest",
@@ -75,7 +72,14 @@ export default function Topbar() {
   if (pathname.startsWith("/events/event-overview/")) {
     buttonConfig[pathname] = {
       label: "Add guest tag",
-      action: () => console.log("Add Guest Clicked"),
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <AddGuestTagDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+          event={event as Event}
+        />
+      ),
     };
   }
 

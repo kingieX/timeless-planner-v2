@@ -149,8 +149,8 @@ export default function EmptyGuestList({ event }: EmptyGuestListProps) {
 
           {/* Name badge printing */}
           <div className="flex items-center space-x-2">
-            <Switch id="team" />
-            <Label htmlFor="team">NAME BADGE PRINTING</Label>
+            <Switch id="badge-printing" />
+            <Label htmlFor="badge-printing">NAME BADGE PRINTING</Label>
           </div>
 
           <div className="flex justify-between gap-2 mt-4 md:mt-6">

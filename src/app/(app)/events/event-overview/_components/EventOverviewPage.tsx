@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EllipsisVertical } from "lucide-react";
 import { Event } from "@/types/types";
 import EmptyGuestList from "./EmptyGuestList";
 import GuestList from "./GuestList";
+import { useProject } from "@/context/ProjectContext";
 
 interface EventProps {
   event: Event;
@@ -16,6 +17,11 @@ export default function EventOverviewPage({ event }: EventProps) {
   //   const hasGuests = event.totalGuest?.length > 0;
 
   // console.log("event", event.id);
+  const { setEvent } = useProject();
+
+  useEffect(() => {
+    setEvent(event); // Set project in context
+  }, [event, setEvent]);
 
   return (
     <div className="py-6 md:px-6 px-4 bg-white">
@@ -99,7 +105,7 @@ export default function EventOverviewPage({ event }: EventProps) {
 
           {/* Guest Tag Content */}
           <TabsContent value="guest-tag">
-            {event.guestTag.length < 0 &&
+            {event.guestTag.length > 0 &&
             event.guestTag.some((tag) => tag.guests.length > 0) ? (
               <GuestList event={event} />
             ) : (

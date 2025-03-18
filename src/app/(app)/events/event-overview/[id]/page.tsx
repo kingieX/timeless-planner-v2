@@ -1,5 +1,5 @@
 import DashboardLayout from "@/app/(app)/dashboard/layout";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 import EventOverviewPage from "../_components/EventOverviewPage";
 import { projectData } from "@/data/data"; // Importing centralized data
 
@@ -20,7 +20,7 @@ export default async function EventOverview({
   //   console.log("event", event);
 
   if (!event) {
-    return notFound(); // Show 404 page if project ID doesn't exist
+    return <p>Project not found</p>;
   }
 
   return (

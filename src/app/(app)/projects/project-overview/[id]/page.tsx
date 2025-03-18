@@ -3,6 +3,7 @@
 import { projectData } from "@/data/data"; // Import centralized data
 import { Project } from "@/types/types"; // Import the correct type
 import ProjectOverviewPage from "../_components/ProjectOverviewPage";
+import DashboardLayout from "@/app/(app)/dashboard/layout";
 
 export default async function ProjectOverview({
   params,
@@ -23,8 +24,8 @@ export default async function ProjectOverview({
   }
 
   return (
-    <>
+    <DashboardLayout>
       <ProjectOverviewPage project={project} />
-    </>
+    </DashboardLayout>
   );
 }
