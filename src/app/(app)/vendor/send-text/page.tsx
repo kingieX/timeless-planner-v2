@@ -1,0 +1,40 @@
+"use client";
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import DashboardLayout from "../../dashboard/layout";
+import { Button } from "@/components/ui/button";
+
+export default function SendText() {
+  const searchParams = useSearchParams();
+  //   const serviceName = searchParams.get("serviceName");
+  const phone = searchParams.get("phone");
+  //   const address = searchParams.get("address");
+  const [message, setMessage] = useState("");
+
+  return (
+    <DashboardLayout>
+      <div className="md:p-6 p-4 mt-12 md:max-w-2xl">
+        <div className="flex items-center mb-4 gap-8">
+          <h2 className="text-lg">Vendor Phone</h2>
+
+          <p className="text-red-500">{phone}</p>
+        </div>
+        <div className="mb-4 space-y-2">
+          <label htmlFor="message">Message</label>
+          <textarea
+            className="w-full border p-2 mb-4 rounded"
+            rows={4}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </div>
+        <Button
+          className="w-full"
+          onClick={() => alert(`Message sent to ${phone}`)}
+        >
+          Send message
+        </Button>
+      </div>
+    </DashboardLayout>
+  );
+}

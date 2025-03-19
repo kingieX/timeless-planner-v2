@@ -10,6 +10,7 @@ import AddEventDialog from "@/app/(app)/_components/dialogs/AddEventDialog";
 import AddGuestTagDialog from "@/app/(app)/_components/dialogs/AddGuestTagDialog";
 import { useProject } from "@/context/ProjectContext";
 import { Project, Event } from "@/types/types";
+import AddVendorDialog from "@/app/(app)/_components/AddVendorDialog";
 
 export default function Topbar() {
   const { project, event, guestTag } = useProject();
@@ -53,9 +54,12 @@ export default function Topbar() {
         />
       ),
     },
-    "/check-in": {
-      label: "Check-in Guest",
-      action: () => console.log("Check-in Clicked"),
+    "/vendor": {
+      label: "Add vendor",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <AddVendorDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      ),
     },
   };
 

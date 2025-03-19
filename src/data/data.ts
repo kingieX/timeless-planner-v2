@@ -1,4 +1,5 @@
 import { ProjectData } from "@/types/types";
+import { Vendor } from "@/types/types";
 
 export const projectData: ProjectData = {
   projects: [
@@ -285,3 +286,33 @@ export const projectData: ProjectData = {
     },
   ],
 };
+
+export const vendorData: Vendor[] = [
+  {
+    id: 1,
+    serviceName: "Foodie's Delight Restaurant",
+    email: "olamhoore@gmail.com",
+    phone: "0802 987 3456",
+    officeAddress: "25 Adekunle St, Surulere 105028, Lagos",
+    rating: 4.5,
+    reviews: 120,
+  },
+  {
+    id: 2,
+    serviceName: "Event Perfect Caterers",
+    email: "eventperfect@gmail.com",
+    phone: "0803 123 9876",
+    officeAddress: "18 Allen Avenue, Ikeja 101233, Lagos",
+    rating: 4.7,
+    reviews: 90,
+  },
+  {
+    id: 3,
+    serviceName: "Green Spaces Nearby",
+    email: "greenspaces@gmail.com",
+    phone: "0804 567 8901",
+    officeAddress: "30 Adeola St, Ikoyi 100023, Lagos",
+    rating: 4.9,
+    reviews: 150,
+  },
+];

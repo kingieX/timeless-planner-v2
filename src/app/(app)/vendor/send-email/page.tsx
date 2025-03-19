@@ -1,0 +1,45 @@
+"use client";
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import DashboardLayout from "../../dashboard/layout";
+import { Button } from "@/components/ui/button";
+
+export default function SendEmail() {
+  const searchParams = useSearchParams();
+  //   const serviceName = searchParams.get("serviceName");
+  const email = searchParams.get("email");
+  //   const address = searchParams.get("address");
+  const [message, setMessage] = useState("");
+
+  return (
+    <DashboardLayout>
+      <div className="md:p-6 p-4 mt-12 md:max-w-2xl">
+        <div className="flex items-center mb-4 gap-8">
+          <h2 className="text-lg">Vendor Email</h2>
+          <div className="flex items-center gap-2">
+            <span className="bg-gray-100 text-xs font-semibold text-gray-600 rounded p-1">
+              {email?.slice(0, 2).toUpperCase()}
+            </span>
+            <p className="text-red-500">{email}</p>
+          </div>
+        </div>
+        <div className="mb-4 space-y-2">
+          <label htmlFor="message">Message</label>
+          <textarea
+            className="w-full border p-2 mb-4 rounded"
+            rows={4}
+            placeholder="enter your message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </div>
+        <Button
+          className="w-full"
+          onClick={() => alert(`Email sent to ${email}`)}
+        >
+          Send message
+        </Button>
+      </div>
+    </DashboardLayout>
+  );
+}
