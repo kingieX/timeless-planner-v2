@@ -59,3 +59,13 @@ export interface Project {
 export interface ProjectData {
   projects: Project[];
 }
+
+export interface Vendor {
+  id: number;
+  serviceName: string;
+  email: string;
+  phone: string;
+  officeAddress: string;
+  rating: number;
+  reviews: number;
+}
