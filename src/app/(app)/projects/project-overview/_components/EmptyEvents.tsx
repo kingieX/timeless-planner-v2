@@ -39,7 +39,9 @@ export default function EmptyEvents({
 }: EmptyEventsProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [eventName, setEventName] = useState("");
-  const [selectedProject, setSelectedProject] = useState<string>(project.title);
+  const [selectedProject, setSelectedProject] = useState<string>(
+    project.title || ""
+  );
   const router = useRouter();
 
   // console.log("project", project);
