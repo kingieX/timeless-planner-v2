@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +27,7 @@ interface AddEventDialogProps {
   isOpen: boolean;
   // setIsOpen: () => void;
   setIsOpen: (value: boolean) => void;
-  project: Project;
+  project?: Project | null;
   // projectData: { projects: Project[] };
 }
 
@@ -37,13 +37,19 @@ export default function AddEventDialog({
   project,
 }: //   projectData,
 AddEventDialogProps) {
-  // console.log("project on AddEventDialog: ", project);
+  console.log("project on AddEventDialog: ", project);
 
   const [eventName, setEventName] = useState("");
   const [selectedProject, setSelectedProject] = useState<string>(
-    project.title || ""
+    project?.title || ""
   );
   const router = useRouter();
+
+  useEffect(() => {
+    if (project?.title) {
+      setSelectedProject(project.title);
+    }
+  }, [project]);
 
   const handleContinue = () => {
     const queryParams = new URLSearchParams({
