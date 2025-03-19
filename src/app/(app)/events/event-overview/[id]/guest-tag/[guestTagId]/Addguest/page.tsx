@@ -8,6 +8,7 @@ import { AddGuestManually } from "./_components/AddGuestManually";
 
 import { projectData } from "@/data/data";
 import UploadCSV from "./_components/UploadCSV";
+import FormLink from "./_components/FormLink";
 
 function AddGuestForm() {
   const [activeTab, setActiveTab] = useState("add-guest-manually");
@@ -104,7 +105,7 @@ function AddGuestForm() {
               </TabsContent>
               <TabsContent value="get-form-link">
                 {/* Form link section */}
-                {/* <FormLink /> */}
+                <FormLink eventName={eventName} />
               </TabsContent>
             </div>
           </Tabs>
