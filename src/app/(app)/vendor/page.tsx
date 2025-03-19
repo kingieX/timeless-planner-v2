@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import AllVendors from "./_components/AllVendors";
+import SearchVendors from "./_components/SearchVendors";
 
 export default function Vendor() {
   const [activeTab, setActiveTab] = useState("vendors");
@@ -88,12 +89,12 @@ export default function Vendor() {
             </div>
 
             {/* Tabs Content */}
-            <div className="py-12">
+            <div className="pt-12">
               <TabsContent value="vendors">
                 <AllVendors />
               </TabsContent>
               <TabsContent value="search-vendors">
-                {/* <SearchVendors /> */}
+                <SearchVendors />
               </TabsContent>
             </div>
           </Tabs>
