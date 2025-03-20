@@ -10,7 +10,7 @@ import AddEventDialog from "@/app/(app)/_components/dialogs/AddEventDialog";
 import AddGuestTagDialog from "@/app/(app)/_components/dialogs/AddGuestTagDialog";
 import { useProject } from "@/context/ProjectContext";
 import { Project, Event } from "@/types/types";
-import AddVendorDialog from "@/app/(app)/_components/AddVendorDialog";
+import AddVendorDialog from "@/app/(app)/_components/dialogs/AddVendorDialog";
 
 export default function Topbar() {
   const { project, event, guestTag } = useProject();
@@ -60,6 +60,13 @@ export default function Topbar() {
       dialog: (
         <AddVendorDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
       ),
+    },
+    "/tasks": {
+      label: "Create Task",
+      action: () => setIsDialogOpen(true),
+      // dialog: (
+      //   <AddVendorDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      // ),
     },
   };
 

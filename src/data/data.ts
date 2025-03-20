@@ -1,5 +1,6 @@
 import { ProjectData } from "@/types/types";
 import { Vendor } from "@/types/types";
+import { Task } from "@/types/types";
 
 export const projectData: ProjectData = {
   projects: [
@@ -314,5 +315,121 @@ export const vendorData: Vendor[] = [
     officeAddress: "30 Adeola St, Ikoyi 100023, Lagos",
     rating: 4.9,
     reviews: 150,
+  },
+];
+
+export const tasks: Task[] = [
+  {
+    id: "task-001",
+    taskName: "Install sensors",
+    taskDescription:
+      "Set up and install all IoT sensors in the smart waste bins.",
+    startDate: "March 2, 2025",
+    endDate: "March 5, 2025",
+    status: "Completed",
+    taskInstruction: "Ensure all devices are calibrated before deployment.",
+    uploadAttachment: "https://example.com/instructions.pdf",
+    maximumTeam: 5,
+    priorityLevel: "High",
+    Event: true,
+    event: {
+      id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      name: "System Deployment",
+    },
+    team: [
+      { id: "team-001", email: "alice@example.com", role: "Team Lead" },
+      { id: "team-002", email: "bob@example.com", role: "Team Member" },
+      { id: "team-003", email: "charlie@example.com", role: "Team Member" },
+    ],
+  },
+  {
+    id: "task-002",
+    taskName: "Write user manual",
+    taskDescription:
+      "Prepare a comprehensive guide for using the smart waste management system.",
+    startDate: "March 8, 2025",
+    endDate: "March 12, 2025",
+    status: "In Progress",
+    taskInstruction: "Include diagrams and troubleshooting section.",
+    uploadAttachment: "https://example.com/user-manual-template.pdf",
+    maximumTeam: 3,
+    priorityLevel: "Medium",
+    Event: false,
+    team: [
+      { id: "team-004", email: "dave@example.com", role: "Team Lead" },
+      { id: "team-005", email: "emily@example.com", role: "Team Member" },
+    ],
+  },
+  {
+    id: "task-003",
+    taskName: "Conduct training session",
+    taskDescription:
+      "Train municipal workers on using the monitoring dashboard.",
+    startDate: "March 15, 2025",
+    endDate: "March 16, 2025",
+    status: "Pending",
+    taskInstruction: "Prepare presentations and conduct a demo session.",
+    uploadAttachment: "https://example.com/training-presentation.pptx",
+    maximumTeam: 4,
+    priorityLevel: "High",
+    Event: true,
+    event: {
+      id: "c3d4e5f6-a1b2-7890-abcd-ef3234567892",
+      name: "App Launch",
+    },
+    team: [
+      { id: "team-006", email: "fiona@example.com", role: "Team Lead" },
+      { id: "team-007", email: "george@example.com", role: "Team Member" },
+    ],
+  },
+  {
+    id: "task-004",
+    taskName: "Procure backup batteries",
+    taskDescription: "Purchase and stock backup power supplies for all bins.",
+    startDate: "March 10, 2025",
+    endDate: "March 18, 2025",
+    status: "In Progress",
+    taskInstruction: "Verify vendor certification before finalizing order.",
+    uploadAttachment: "https://example.com/vendor-list.pdf",
+    maximumTeam: 2,
+    priorityLevel: "Low",
+    Event: false,
+    team: [{ id: "team-008", email: "hannah@example.com", role: "Team Lead" }],
+  },
+  {
+    id: "task-005",
+    taskName: "Post-deployment system check",
+    taskDescription: "Verify all sensors are reporting data after deployment.",
+    startDate: "March 20, 2025",
+    endDate: "March 22, 2025",
+    status: "Pending",
+    taskInstruction: "Run diagnostics and share a report with the team.",
+    uploadAttachment: "https://example.com/system-checklist.pdf",
+    maximumTeam: 3,
+    priorityLevel: "High",
+    Event: true,
+    event: {
+      id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      name: "System Deployment",
+    },
+    team: [
+      { id: "team-009", email: "ian@example.com", role: "Team Lead" },
+      { id: "team-002", email: "bob@example.com", role: "Team Member" },
+    ],
+  },
+  {
+    id: "task-006",
+    taskName: "Update project documentation",
+    taskDescription:
+      "Compile all notes, changes, and team inputs into the project wiki.",
+    startDate: "March 25, 2025",
+    endDate: "March 28, 2025",
+    status: "Pending",
+    taskInstruction: "Ensure document versioning is in place.",
+    uploadAttachment: "https://example.com/documentation-guide.pdf",
+    maximumTeam: 2,
+    priorityLevel: "Medium",
+    Event: false,
+    team: [{ id: "team-010", email: "jess@example.com", role: "Team Lead" }],
   },
 ];

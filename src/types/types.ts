@@ -69,3 +69,33 @@ export interface Vendor {
   rating: number;
   reviews: number;
 }
+
+// /types for tasks
+export type TeamRole = "Team Lead" | "Team Member";
+
+export interface TaskTeamMember {
+  id: string;
+  email: string;
+  role: TeamRole;
+}
+
+export interface TaskEvent {
+  id: string;
+  name: string;
+}
+
+export interface Task {
+  id: string;
+  taskName: string;
+  taskDescription: string;
+  startDate: string;
+  endDate: string;
+  status: "Pending" | "In Progress" | "Completed";
+  taskInstruction: string;
+  uploadAttachment: string;
+  maximumTeam: number;
+  priorityLevel: "Low" | "Medium" | "High";
+  Event: boolean;
+  event?: TaskEvent; // optional if Event is false
+  team: TaskTeamMember[];
+}
