@@ -91,10 +91,12 @@ export interface Task {
   startDate: string;
   endDate: string;
   status: "Pending" | "In Progress" | "Completed";
+  progress: number;
   taskInstruction: string;
   uploadAttachment: string;
   maximumTeam: number;
   priorityLevel: "Low" | "Medium" | "High";
+  createdAt: string;
   Event: boolean;
   event?: TaskEvent; // optional if Event is false
   team: TaskTeamMember[];

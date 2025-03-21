@@ -3,6 +3,7 @@ import DashboardLayout from "@/app/(app)/dashboard/layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import AvailableTask from "./_components/AvailableTask";
 
 export default function Tasks() {
   const [activeTab, setActiveTab] = useState("available-task");
@@ -89,7 +90,7 @@ export default function Tasks() {
             {/* Tabs Content */}
             <div className="pt-12">
               <TabsContent value="available-task">
-                {/* <AllVendors /> */}
+                <AvailableTask filter={filter} />
               </TabsContent>
               <TabsContent value="completed-task">
                 {/* <SearchVendors /> */}

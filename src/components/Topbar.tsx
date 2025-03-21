@@ -11,6 +11,7 @@ import AddGuestTagDialog from "@/app/(app)/_components/dialogs/AddGuestTagDialog
 import { useProject } from "@/context/ProjectContext";
 import { Project, Event } from "@/types/types";
 import AddVendorDialog from "@/app/(app)/_components/dialogs/AddVendorDialog";
+import CreateTaskDialog from "@/app/(app)/_components/dialogs/CreateTaskDialog";
 
 export default function Topbar() {
   const { project, event, guestTag } = useProject();
@@ -64,9 +65,9 @@ export default function Topbar() {
     "/tasks": {
       label: "Create Task",
       action: () => setIsDialogOpen(true),
-      // dialog: (
-      //   <AddVendorDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
-      // ),
+      dialog: (
+        <CreateTaskDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      ),
     },
   };
 
