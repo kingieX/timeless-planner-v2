@@ -2,7 +2,19 @@ import { tasks } from "@/data/data";
 import { Task } from "@/types/types";
 import React from "react";
 import CreateTask from "./CreateTask";
-import { Calendar, MessageSquare, MoreVertical } from "lucide-react";
+import {
+  Calendar,
+  EllipsisVertical,
+  MessageSquare,
+  SquarePen,
+  Trash,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface AvailableTaskProps {
   filter: string;
@@ -101,9 +113,21 @@ const AvailableTask = ({ filter }: AvailableTaskProps) => {
                   </div>
                 </div>
               </div>
-              <button className="absolute top-4 right-4">
-                <MoreVertical size={20} />
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="absolute top-4 right-4 p-1 border rounded">
+                  <EllipsisVertical size={20} className="text-gray-600" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem className="text-gray-600 hover:text-gray-400">
+                    <SquarePen />
+                    <span>Edit task</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-red-600 hover:text-red-400">
+                    <Trash />
+                    <span>Delete task</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           ))}
         </div>
