@@ -20,6 +20,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import Topbar from "@/components/Topbar";
 import dynamic from "next/dynamic";
+import { Paperclip } from "lucide-react";
 
 const TiptapEditor = dynamic(() => import("./_components/TiptapEditor"), {
   ssr: false,
@@ -43,20 +44,38 @@ const CreateTaskPage = () => {
 
             <Accordion
               type="multiple"
-              defaultValue={["table-arrangement", "team"]}
+              defaultValue={[
+                "table-arrangement",
+                "file-attachment",
+                "task-settings",
+                "team",
+              ]}
             >
               <AccordionItem value="table-arrangement">
-                <AccordionTrigger>Table Arrangement</AccordionTrigger>
+                <AccordionTrigger className="border-b mb-4">
+                  Table Arrangement
+                </AccordionTrigger>
                 <AccordionContent>
-                  <Textarea placeholder="Task Description" className="mb-4" />
-                  <TiptapEditor />
+                  <div className="flex flex-col gap-2">
+                    <label>Task Description</label>
+                    <Textarea placeholder="Task Description" className="mb-4" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label>Task Instruction</label>
+                    <TiptapEditor />
+                  </div>
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="file-attachment">
-                <AccordionTrigger>File Attachment</AccordionTrigger>
+                <AccordionTrigger className="border-b mb-4">
+                  File Attachment
+                </AccordionTrigger>
                 <AccordionContent>
-                  <Button variant="outline">Upload Attachment</Button>
+                  <Button variant="outline">
+                    <Paperclip />
+                    Upload Attachment
+                  </Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -120,7 +139,9 @@ const CreateTaskPage = () => {
               </AccordionItem>
 
               <AccordionItem value="team">
-                <AccordionTrigger>Team</AccordionTrigger>
+                <AccordionTrigger className="border-b mb-4">
+                  Team
+                </AccordionTrigger>
                 <AccordionContent>
                   {[1, 2, 3, 4].map((item) => (
                     <div
