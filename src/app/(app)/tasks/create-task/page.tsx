@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -20,7 +20,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import Topbar from "@/components/Topbar";
 import dynamic from "next/dynamic";
-import { Paperclip } from "lucide-react";
+import { Info, Mail, Paperclip, Save, Settings, User } from "lucide-react";
 
 const TiptapEditor = dynamic(() => import("./_components/TiptapEditor"), {
   ssr: false,
@@ -32,16 +32,17 @@ const CreateTaskPage = () => {
   return (
     <div>
       <Topbar />
-      <div className="container mx-auto p-4 py-16">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
-          <div className="flex-1 space-y-6">
-            <div className="flex justify-end items-center">
-              <div className="space-x-2">
-                <Button variant="outline">Save as Draft</Button>
-                <Button>Save task</Button>
-              </div>
-            </div>
-
+      <div className="w-full bg-white flex justify-end items-center px-8  fixed z-30 pt-16">
+        <div className="flex justify-center items-center space-x-2">
+          <Button className="text-gray-500 border-none bg-transparent shadow-none hover:bg-gray-100">
+            <Save /> Save as Draft
+          </Button>
+          <Button>Save task</Button>
+        </div>
+      </div>
+      <div className="container mx-auto p-4 pt-24 px-8">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start md:gap-12">
+          <div className="flex-1 space-y-6 md:ml-20">
             <Accordion
               type="multiple"
               defaultValue={[
@@ -72,7 +73,10 @@ const CreateTaskPage = () => {
                   File Attachment
                 </AccordionTrigger>
                 <AccordionContent>
-                  <Button variant="outline">
+                  <Button
+                    variant="outline"
+                    className="border-gray-800 hover:border-primary"
+                  >
                     <Paperclip />
                     Upload Attachment
                   </Button>
@@ -83,55 +87,97 @@ const CreateTaskPage = () => {
                 <AccordionTrigger>Task Settings</AccordionTrigger>
                 <AccordionContent>
                   <Card>
-                    <CardContent className="p-4 space-y-4">
-                      <div>
-                        <label className="text-sm font-medium">
-                          Maximum Team
-                        </label>
-                        <Input type="number" placeholder="0" />
-                        <p className="text-xs text-gray-500 mt-1">
-                          Set 0 for no limits.
-                        </p>
-                      </div>
+                    <CardTitle className="flex space-x-2 items-center border-l-2 border-l-primary p-2 text-gray-600 mt-1">
+                      <Settings size={16} /> <span>General</span>
+                    </CardTitle>
+                    <CardContent className="flex md:gap-8 gap-4 md:-pl-4 pl-0">
+                      <div className="md:w-1/4 w-0 bg-gray-100"></div>
+                      <div className="w-full flex flex-col md:gap-8 gap-4 mt-2">
+                        {/* Maximum Team */}
+                        <div className="flex justify-between gap-2">
+                          <label className="text-sm font-medium shrink-0">
+                            Maximum Team
+                          </label>
+                          <div className="md:w-1/2 w-3/4">
+                            <Input type="number" placeholder="0" />
+                            <div className="flex items- gap-1 mt-2">
+                              <Info size={16} className="text-gray-500" />
+                              <p className="text-xs max-w-xs text-gray-500">
+                                Number of Team that can be added to this task.
+                                Set 0 for no limits.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
 
-                      <div>
-                        <label className="text-sm font-medium">
-                          Priority Level
-                        </label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Priority" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="High">High</SelectItem>
-                            <SelectItem value="Medium">Medium</SelectItem>
-                            <SelectItem value="Low">Low</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                        {/* Priority Level */}
+                        <div className="flex justify-between gap-2">
+                          <label className="text-sm font-medium shrink-0">
+                            Priority Level
+                          </label>
+                          <div className="md:w-1/2 w-3/4">
+                            <Select>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Priority" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="High">High</SelectItem>
+                                <SelectItem value="Medium">Medium</SelectItem>
+                                <SelectItem value="Low">Low</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <div className="flex items- gap-1 mt-2">
+                              <Info size={16} className="text-gray-500" />
+                              <p className="text-xs max-w-xs text-gray-500">
+                                Task priority level
+                              </p>
+                            </div>
+                          </div>
+                        </div>
 
-                      <div className="flex items-center gap-4">
-                        <Switch id="event-toggle" />
-                        <label
-                          htmlFor="event-toggle"
-                          className="text-sm font-medium"
-                        >
-                          Link Event to Task
-                        </label>
-                      </div>
+                        {/* Event toggle */}
+                        <div className="flex justify-between gap-2">
+                          <label
+                            htmlFor="event-toggle"
+                            className="text-sm font-medium shrink-0"
+                          >
+                            Event
+                          </label>
+                          <div className="md:w-1/2 w-3/4">
+                            <Switch id="event-toggle" />
+                            <div className="flex items- gap-1 mt-2">
+                              <Info size={16} className="text-gray-500" />
+                              <p className="text-xs max-w-xs text-gray-500">
+                                Link Event to Task
+                              </p>
+                            </div>
+                          </div>
+                        </div>
 
-                      <div>
-                        <label className="text-sm font-medium">Event</label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="None" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="None">None</SelectItem>
-                            <SelectItem value="Event1">Event 1</SelectItem>
-                            <SelectItem value="Event2">Event 2</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        {/* Event selection */}
+                        <div className="flex justify-between gap-2">
+                          <label className="text-sm font-medium shrink-0">
+                            Event
+                          </label>
+                          <div className="md:w-1/2 w-3/4">
+                            <Select>
+                              <SelectTrigger>
+                                <SelectValue placeholder="None" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="None">None</SelectItem>
+                                <SelectItem value="Event1">Event 1</SelectItem>
+                                <SelectItem value="Event2">Event 2</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <div className="flex items- gap-1 mt-2">
+                              <Info size={16} className="text-gray-500" />
+                              <p className="text-xs max-w-xs text-gray-500">
+                                Add Event
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -142,31 +188,60 @@ const CreateTaskPage = () => {
                 <AccordionTrigger className="border-b mb-4">
                   Team
                 </AccordionTrigger>
-                <AccordionContent>
-                  {[1, 2, 3, 4].map((item) => (
-                    <div
-                      key={item}
-                      className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
-                    >
-                      <Input placeholder="Add Team Email" />
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Role" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="team-lead">Team Lead</SelectItem>
-                          <SelectItem value="team">Team</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  ))}
+                <AccordionContent className="flex md:gap-8 gap-4 -pl-4">
+                  <div className="w-1/4 md:block hidden">Team</div>
+                  <div className="px-2 w-full">
+                    {[1, 2, 3, 4].map((item) => (
+                      <div
+                        key={item}
+                        className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
+                      >
+                        <div className="flex flex-col gap-2">
+                          <label>Add Team Email</label>
+                          <div className="relative">
+                            <Mail
+                              size={16}
+                              className="absolute top-2.5 left-2 text-gray-600"
+                            />
+                            <Input
+                              placeholder="Add Team Email"
+                              className="pl-8"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                          <label>Add Team Role</label>
+                          <div className="relative">
+                            <User
+                              size={16}
+                              className="absolute top-2.5 left-2 text-gray-600"
+                            />
+                            <Select>
+                              <SelectTrigger className="pl-7">
+                                <SelectValue placeholder="Select Role" />
+                              </SelectTrigger>
+                              <SelectContent className="pl-8">
+                                <SelectItem value="team-lead">
+                                  Team Lead
+                                </SelectItem>
+                                <SelectItem value="team">
+                                  Team Member
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
           </div>
 
-          <div className="w-full md:w-1/4 mt-6 md:mt-0">
-            <Card>
+          <div className="w-full md:w-1/4 mt-6 md:mt-20">
+            <Card className="border-none shadow-none">
               <CardContent className="p-4 text-sm text-gray-600 space-y-2">
                 <h4 className="font-semibold mb-2">Task Creation Tips</h4>
                 {Array.from({ length: 10 }).map((_, index) => (

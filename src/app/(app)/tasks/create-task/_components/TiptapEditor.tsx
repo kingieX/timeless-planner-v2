@@ -26,7 +26,7 @@ const TiptapEditor = () => {
       Link.configure({ openOnClick: false }),
       Image,
     ],
-    content: "<p></p>",
+    content: "<p>Task instruction</p>",
   });
 
   if (!editor) {
@@ -41,8 +41,8 @@ const TiptapEditor = () => {
   };
 
   return (
-    <div className="border rounded-xl shadow-sm p-4 w-full">
-      <div className="flex flex-wrap gap-2 mb-4 border-b pb-3 sticky top-0 bg-white z-10">
+    <div className="border rounded-xl shadow-sm p- w-full">
+      <div className="bg-gray-100 flex flex-wrap gap-2 p-4 mb-4 border-b pb-3 sticky top-0 z-10">
         <Button
           variant="ghost"
           size="icon"
@@ -140,7 +140,7 @@ const TiptapEditor = () => {
 
       <EditorContent
         editor={editor}
-        className="prose max-w-full min-h-[150px] focus:outline-none"
+        className="px-4 prose max-w-full min-h-[150px] focus:outline-none focus:border-none outline-none"
       />
     </div>
   );
