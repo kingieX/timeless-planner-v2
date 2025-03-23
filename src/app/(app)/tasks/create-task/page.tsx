@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,20 +20,47 @@ import {
 import { Switch } from "@/components/ui/switch";
 import Topbar from "@/components/Topbar";
 import dynamic from "next/dynamic";
+import { projectData } from "@/data/data";
 import { Info, Mail, Paperclip, Save, Settings, User } from "lucide-react";
 
 const TiptapEditor = dynamic(() => import("./_components/TiptapEditor"), {
   ssr: false,
 });
-
 // import TiptapEditor from "./_components/TiptapEditor";
 
+interface TeamMember {
+  email: string;
+  role: string;
+}
+
 const CreateTaskPage = () => {
+  const [eventEnabled, setEventEnabled] = useState(false);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
+    { email: "", role: "" },
+  ]);
+
+  const handleEmailChange = (index: number, value: string) => {
+    const updated = [...teamMembers];
+    updated[index].email = value;
+    setTeamMembers(updated);
+
+    // Add a new row if this is the last input and the user is filling it
+    if (index === teamMembers.length - 1 && value.trim() !== "") {
+      setTeamMembers([...updated, { email: "", role: "" }]);
+    }
+  };
+
+  const handleRoleChange = (index: number, value: string) => {
+    const updated = [...teamMembers];
+    updated[index].role = value;
+    setTeamMembers(updated);
+  };
+
   return (
     <div>
       <Topbar />
       <div className="w-full bg-white flex justify-end items-center px-8  fixed z-30 pt-16">
-        <div className="flex justify-center items-center space-x-2">
+        <div className="flex justify-center items-center space-x-2 md:mr-24">
           <Button className="text-gray-500 border-none bg-transparent shadow-none hover:bg-gray-100">
             <Save /> Save as Draft
           </Button>
@@ -136,7 +163,7 @@ const CreateTaskPage = () => {
                         </div>
 
                         {/* Event toggle */}
-                        <div className="flex justify-between gap-2">
+                        <div className="flex justify-between gap-2 mt-4">
                           <label
                             htmlFor="event-toggle"
                             className="text-sm font-medium shrink-0"
@@ -144,8 +171,12 @@ const CreateTaskPage = () => {
                             Event
                           </label>
                           <div className="md:w-1/2 w-3/4">
-                            <Switch id="event-toggle" />
-                            <div className="flex items- gap-1 mt-2">
+                            <Switch
+                              id="event-toggle"
+                              checked={eventEnabled}
+                              onCheckedChange={setEventEnabled}
+                            />
+                            <div className="flex items-start gap-1 mt-2">
                               <Info size={16} className="text-gray-500" />
                               <p className="text-xs max-w-xs text-gray-500">
                                 Link Event to Task
@@ -155,22 +186,42 @@ const CreateTaskPage = () => {
                         </div>
 
                         {/* Event selection */}
-                        <div className="flex justify-between gap-2">
+                        <div className="flex justify-between gap-2 mt-4">
                           <label className="text-sm font-medium shrink-0">
                             Event
                           </label>
                           <div className="md:w-1/2 w-3/4">
-                            <Select>
-                              <SelectTrigger>
+                            <Select disabled={!eventEnabled}>
+                              <SelectTrigger
+                                className={
+                                  !eventEnabled
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : ""
+                                }
+                              >
                                 <SelectValue placeholder="None" />
                               </SelectTrigger>
                               <SelectContent>
-                                <SelectItem value="None">None</SelectItem>
-                                <SelectItem value="Event1">Event 1</SelectItem>
-                                <SelectItem value="Event2">Event 2</SelectItem>
+                                {projectData.projects &&
+                                projectData.projects.length > 0 ? (
+                                  projectData.projects
+                                    .flatMap((project) => project.events)
+                                    .map((event) => (
+                                      <SelectItem
+                                        key={event.id}
+                                        value={event.id.toString()}
+                                      >
+                                        {event.name}
+                                      </SelectItem>
+                                    ))
+                                ) : (
+                                  <p className="px-2 py-1 text-gray-500">
+                                    No projects available
+                                  </p>
+                                )}
                               </SelectContent>
                             </Select>
-                            <div className="flex items- gap-1 mt-2">
+                            <div className="flex items-start gap-1 mt-2">
                               <Info size={16} className="text-gray-500" />
                               <p className="text-xs max-w-xs text-gray-500">
                                 Add Event
@@ -191,9 +242,9 @@ const CreateTaskPage = () => {
                 <AccordionContent className="flex md:gap-8 gap-4 -pl-4">
                   <div className="w-1/4 md:block hidden">Team</div>
                   <div className="px-2 w-full">
-                    {[1, 2, 3, 4].map((item) => (
+                    {teamMembers.map((member, index) => (
                       <div
-                        key={item}
+                        key={index}
                         className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
                       >
                         <div className="flex flex-col gap-2">
@@ -206,6 +257,10 @@ const CreateTaskPage = () => {
                             <Input
                               placeholder="Add Team Email"
                               className="pl-8"
+                              value={member.email}
+                              onChange={(e) =>
+                                handleEmailChange(index, e.target.value)
+                              }
                             />
                           </div>
                         </div>
@@ -217,7 +272,12 @@ const CreateTaskPage = () => {
                               size={16}
                               className="absolute top-2.5 left-2 text-gray-600"
                             />
-                            <Select>
+                            <Select
+                              value={member.role}
+                              onValueChange={(value) =>
+                                handleRoleChange(index, value)
+                              }
+                            >
                               <SelectTrigger className="pl-7">
                                 <SelectValue placeholder="Select Role" />
                               </SelectTrigger>
