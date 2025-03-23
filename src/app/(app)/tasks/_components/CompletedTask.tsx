@@ -1,7 +1,6 @@
 import { tasks } from "@/data/data";
 import { Task } from "@/types/types";
 import React from "react";
-import CreateTask from "./CreateTask";
 import {
   Calendar,
   EllipsisVertical,
@@ -17,26 +16,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
 
-interface AvailableTaskProps {
-  filter: string;
-}
-
-const AvailableTask = ({ filter }: AvailableTaskProps) => {
-  const AllTasks: Task[] = tasks;
+const CompletedTask = () => {
   const router = useRouter();
 
-  const filteredTasks = AllTasks.filter((task) => {
-    const createdDate = new Date(task.createdAt);
-    const now = new Date();
-
-    if (filter === "Last 7 days") {
-      return now.getTime() - createdDate.getTime() <= 7 * 24 * 60 * 60 * 1000;
-    }
-    if (filter === "Last 30 days") {
-      return now.getTime() - createdDate.getTime() <= 30 * 24 * 60 * 60 * 1000;
-    }
-    return true;
-  });
+  const completedTasks: Task[] = tasks.filter(
+    (task) => task.status === "Completed"
+  );
 
   const getDaysLeft = (endDate: string | undefined) => {
     if (!endDate) return "N/A";
@@ -49,19 +34,18 @@ const AvailableTask = ({ filter }: AvailableTaskProps) => {
 
   return (
     <div className="mt-4">
-      {filteredTasks.length === 0 ? (
+      {completedTasks.length === 0 ? (
         <div className="md:mt-20 mt-12 flex flex-col justify-center items-center">
-          <CreateTask />
+          <p className="text-gray-500">No completed tasks yet.</p>
         </div>
       ) : (
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredTasks.map((task) => (
+          {completedTasks.map((task) => (
             <div
               key={task.id}
               onClick={() => router.push(`/tasks/task-overview/${task.id}`)}
               className="p-4 rounded-lg shadow-md relative cursor-pointer hover:bg-gray-50"
             >
-              {/* <div className="flex justify-between items-center mb-4 mr-8"> */}
               <div className="flex items-center gap-2 mb-4">
                 <h3 className="text-md">{task.taskName}</h3>
                 <span className="text-[#42CEF2] text-xs">
@@ -80,15 +64,9 @@ const AvailableTask = ({ filter }: AvailableTaskProps) => {
                   </span>
                 </div>
                 <div className="shrink-0">
-                  {task.status === "Completed" ? (
-                    <span className="text-green-500 bg-gray-100 px-2 py-1 rounded text-xs font-medium">
-                      {task.status}
-                    </span>
-                  ) : (
-                    <span className="text-yellow-400 bg-gray-100 px-2 py-1 rounded text-xs font-medium">
-                      {task.status}
-                    </span>
-                  )}
+                  <span className="text-green-500 bg-gray-100 px-2 py-1 rounded text-xs font-medium">
+                    {task.status}
+                  </span>
                 </div>
               </div>
 
@@ -115,10 +93,10 @@ const AvailableTask = ({ filter }: AvailableTaskProps) => {
                   </div>
                   <div className="flex items-center space-x-1 text-gray-500">
                     <MessageSquare size={24} /> 4
-                    {/* <span>{task.comments}</span> */}
                   </div>
                 </div>
               </div>
+
               <DropdownMenu>
                 <DropdownMenuTrigger className="absolute top-4 right-4 p-1 border rounded">
                   <EllipsisVertical size={20} className="text-gray-600" />
@@ -142,4 +120,4 @@ const AvailableTask = ({ filter }: AvailableTaskProps) => {
   );
 };
 
-export default AvailableTask;
+export default CompletedTask;

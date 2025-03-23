@@ -33,7 +33,7 @@ export default function EventOverviewPage({ event }: EventProps) {
 
       <div className="flex justify-between items-center mb-4 mt-20">
         <h2 className="md:text-xl font-">{event.name}</h2>
-        <EllipsisVertical size={24} className="md:mr-8" />
+        <EllipsisVertical size={24} className="md:mr-8 cursor-pointer" />
       </div>
 
       <div className="flex justify-between gap-4 md:max-w-md">

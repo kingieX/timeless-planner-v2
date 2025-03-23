@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import AvailableTask from "./_components/AvailableTask";
+import CompletedTask from "./_components/CompletedTask";
 
 export default function Tasks() {
   const [activeTab, setActiveTab] = useState("available-task");
@@ -93,7 +94,7 @@ export default function Tasks() {
                 <AvailableTask filter={filter} />
               </TabsContent>
               <TabsContent value="completed-task">
-                {/* <SearchVendors /> */}
+                <CompletedTask />
               </TabsContent>
             </div>
           </Tabs>

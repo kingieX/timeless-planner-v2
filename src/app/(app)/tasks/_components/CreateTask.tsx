@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function AddEvents() {
+export default function CreateTask() {
   const [isOpen, setIsOpen] = useState(false);
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -27,7 +27,7 @@ export default function AddEvents() {
       taskName,
       taskDescription,
     }).toString();
-    router.push(`/events/add-event?${queryParams}`);
+    router.push(`/tasks/create-task?${queryParams}`);
   };
 
   return (

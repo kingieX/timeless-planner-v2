@@ -17,7 +17,7 @@ interface CreateTaskDialogProps {
   setIsOpen: (value: boolean) => void;
 }
 
-export default function CreateTask({
+export default function CreateTaskDialog({
   isOpen,
   setIsOpen,
 }: CreateTaskDialogProps) {

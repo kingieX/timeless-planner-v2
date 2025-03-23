@@ -20,7 +20,7 @@ export default async function EventOverview({
   //   console.log("event", event);
 
   if (!event) {
-    return <p>Project not found</p>;
+    return <p>event not found</p>;
   }
 
   return (
