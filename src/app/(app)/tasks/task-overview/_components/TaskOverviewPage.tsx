@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,12 +7,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Task } from "@/types/types";
 import { EllipsisVertical, SquarePen, Trash } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface TaskProps {
   task: Task;
 }
 export default function TaskOverviewPage({ task }: TaskProps) {
+  const [activeTab, setActiveTab] = useState("progress");
+
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "High":
@@ -128,6 +132,31 @@ export default function TaskOverviewPage({ task }: TaskProps) {
         <p className="text-gray-600 border rounded-md px-2 py-2 md:mr-8">
           {task.taskDescription}
         </p>
+      </div>
+
+      {/* Task Section */}
+      <div className="flex flex-col justify-center">
+        {/* Tabs Navigation */}
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="">
+          <div className="flex items-center mt-8 border-b">
+            <TabsList>
+              <TabsTrigger value="progress">Progress</TabsTrigger>
+              <TabsTrigger value="team">Team</TabsTrigger>
+              <TabsTrigger value="team-chat">Team Chat</TabsTrigger>
+              <TabsTrigger value="attachments">Attachments</TabsTrigger>
+            </TabsList>
+          </div>
+
+          {/* Guest Tag Content */}
+          <TabsContent value="progress">
+            {/* <EmptyGuestList event={event} /> */}
+          </TabsContent>
+
+          {/* Other Tabs Content */}
+          <TabsContent value="team">{/* <Team /> */}</TabsContent>
+          <TabsContent value="team-chat">{/* <TeamChat /> */}</TabsContent>
+          <TabsContent value="attachments">{/* <Attachments /> */}</TabsContent>
+        </Tabs>
       </div>
     </div>
   );

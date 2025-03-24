@@ -108,7 +108,6 @@ export default function EventOverviewPage({ event }: EventProps) {
       </div>
 
       {/* Event Section */}
-      {/* Event Section */}
       <div className="flex flex-col justify-center">
         {/* Tabs Navigation */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="">
