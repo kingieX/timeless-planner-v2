@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisVertical, SquarePen, Trash } from "lucide-react";
 import { Event } from "@/types/types";
 import EmptyGuestList from "./EmptyGuestList";
 import GuestList from "./GuestList";
 import { useProject } from "@/context/ProjectContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface EventProps {
   event: Event;
@@ -33,7 +39,21 @@ export default function EventOverviewPage({ event }: EventProps) {
 
       <div className="flex justify-between items-center mb-4 mt-20">
         <h2 className="md:text-xl font-">{event.name}</h2>
-        <EllipsisVertical size={24} className="md:mr-8 cursor-pointer" />
+        <DropdownMenu>
+          <DropdownMenuTrigger className="md:mr-8">
+            <EllipsisVertical size={24} className="cursor-pointer" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem className="text-gray-600 hover:text-gray-400">
+              <SquarePen />
+              <span>Edit event</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600 hover:text-red-400">
+              <Trash />
+              <span>Delete event</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       <div className="flex justify-between gap-4 md:max-w-md">
