@@ -9,6 +9,10 @@ import { Task } from "@/types/types";
 import { EllipsisVertical, SquarePen, Trash } from "lucide-react";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ProgressTab from "./ProgressTab";
+import TeamTab from "./TeamTab";
+import TeamChatTab from "./TeamChatTab";
+import AttachmentsTab from "./AttachmentsTab";
 
 interface TaskProps {
   task: Task;
@@ -23,7 +27,7 @@ export default function TaskOverviewPage({ task }: TaskProps) {
       case "Medium":
         return "text-gray-600 bg-gray-100";
       case "Low":
-        return "text-yellow-500 bg-yellow-100";
+        return "text-yellow-700 bg-yellow-100";
       default:
         return "text-gray-500 bg-gray-100";
     }
@@ -34,7 +38,7 @@ export default function TaskOverviewPage({ task }: TaskProps) {
       case "Completed":
         return "text-blue-600 bg-blue-100";
       case "In Progress":
-        return "text-yellow-500 bg-yellow-100";
+        return "text-yellow-700 bg-yellow-100";
       case "Pending":
         return "text-gray-600 bg-gray-100";
       default:
@@ -149,13 +153,19 @@ export default function TaskOverviewPage({ task }: TaskProps) {
 
           {/* Guest Tag Content */}
           <TabsContent value="progress">
-            {/* <EmptyGuestList event={event} /> */}
+            <ProgressTab task={task} />
           </TabsContent>
 
           {/* Other Tabs Content */}
-          <TabsContent value="team">{/* <Team /> */}</TabsContent>
-          <TabsContent value="team-chat">{/* <TeamChat /> */}</TabsContent>
-          <TabsContent value="attachments">{/* <Attachments /> */}</TabsContent>
+          <TabsContent value="team">
+            <TeamTab task={task} />
+          </TabsContent>
+          <TabsContent value="team-chat">
+            <TeamChatTab task={task} />
+          </TabsContent>
+          <TabsContent value="attachments">
+            <AttachmentsTab task={task} />
+          </TabsContent>
         </Tabs>
       </div>
     </div>
