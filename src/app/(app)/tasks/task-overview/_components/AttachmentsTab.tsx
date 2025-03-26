@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Download, ImageIcon } from "lucide-react";
 import { Task } from "@/types/types";
 
