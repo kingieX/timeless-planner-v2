@@ -1,25 +1,24 @@
 "use client";
 import React, { useState } from "react";
 import DashboardLayout from "../dashboard/layout";
-import { ChevronDown } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import AllEvents from "./_components/AllEvents";
+import { ChevronDown } from "lucide-react";
+import AllTeamMember from "./_components/AllTeamMember";
 
-const EventPage = () => {
-  const [activeTab, setActiveTab] = useState("events");
+const TeamPage = () => {
+  const [activeTab, setActiveTab] = useState("team-member");
 
-  const [filter, setFilter] = useState("All events");
+  const [filter, setFilter] = useState("All");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // const filterOptions = ["All Events", "Created by me", "Shared with me"];
-  const filterOptions = ["Last 7 days", "Last 30 days", "All events"] as const;
+  const filterOptions = ["All", "Team lead", "Team member"] as const;
 
   return (
     <DashboardLayout>
       <div className="py-6 space-y-8 bg-white">
         <div className="flex flex-col w-full p-4 bg-white mb-4 fixed z-10">
           <h2 className="md:text-2xl text-xl text-gray-900 font-semibold">
-            Event
+            Team
           </h2>
         </div>
 
@@ -29,39 +28,27 @@ const EventPage = () => {
             <div className="flex justify-between w-full max-w-5xl bg-white pb-4 fixed z-10 items-center mt-8 ">
               <TabsList className="flex space-x-6 border-b">
                 <TabsTrigger
-                  value="events"
+                  value="team-member"
                   className={`pb-2 text-gray-600 rounded-none ${
-                    activeTab === "events"
+                    activeTab === "team-member"
                       ? "border-b-2 border-primary text-primary"
                       : ""
                   }`}
-                  onClick={() => setActiveTab("events")}
+                  onClick={() => setActiveTab("team-member")}
                 >
-                  All Events
+                  Team members
                 </TabsTrigger>
 
                 <TabsTrigger
-                  value="upcoming-events"
+                  value="assigned-team"
                   className={`pb-2 text-gray-600 rounded-none ${
-                    activeTab === "upcoming-events"
+                    activeTab === "assigned-team"
                       ? "border-b-2 border-primary text-primary"
                       : ""
                   }`}
-                  onClick={() => setActiveTab("upcoming-events")}
+                  onClick={() => setActiveTab("assigned-team")}
                 >
-                  Upcoming Events
-                </TabsTrigger>
-
-                <TabsTrigger
-                  value="past-events"
-                  className={`pb-2 text-gray-600 rounded-none ${
-                    activeTab === "past-events"
-                      ? "border-b-2 border-primary text-primary"
-                      : ""
-                  }`}
-                  onClick={() => setActiveTab("past-events")}
-                >
-                  Past Events
+                  Assigned Team
                 </TabsTrigger>
               </TabsList>
 
@@ -102,14 +89,11 @@ const EventPage = () => {
 
             {/* Tabs Content */}
             <div className="pt-16">
-              <TabsContent value="events">
-                <AllEvents filter={filter} />
+              <TabsContent value="team-member">
+                <AllTeamMember filter={filter} />
               </TabsContent>
-              <TabsContent value="upcoming-events">
-                {/* <UpcomingEvents /> */}
-              </TabsContent>
-              <TabsContent value="past-events">
-                {/* <PastEvents /> */}
+              <TabsContent value="assigned-team">
+                {/* <AssignedTeam /> */}
               </TabsContent>
             </div>
           </Tabs>
@@ -119,4 +103,4 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default TeamPage;

@@ -12,6 +12,7 @@ import { useProject } from "@/context/ProjectContext";
 import { Project, Event } from "@/types/types";
 import AddVendorDialog from "@/app/(app)/_components/dialogs/AddVendorDialog";
 import CreateTaskDialog from "@/app/(app)/_components/dialogs/CreateTaskDialog";
+import AddTeamMemberDialog from "@/app/(app)/_components/dialogs/AddTeamMemberDialog";
 
 export default function Topbar() {
   const { project, event, guestTag } = useProject();
@@ -67,6 +68,16 @@ export default function Topbar() {
       action: () => setIsDialogOpen(true),
       dialog: (
         <CreateTaskDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      ),
+    },
+    "/team": {
+      label: "Add team member",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <AddTeamMemberDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+        />
       ),
     },
   };
