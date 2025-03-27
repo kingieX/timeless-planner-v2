@@ -57,7 +57,7 @@ const AllTeamMember: React.FC<AllTeamMemberProps> = ({ filter }) => {
 
   return (
     <div className="mt-4">
-      {filteredMembers.length !== 0 ? (
+      {filteredMembers.length === 0 ? (
         <div className="md:mt-20 mt-12 flex flex-col justify-center items-center">
           <AddTeamMember />
         </div>

@@ -4,6 +4,7 @@ import DashboardLayout from "../dashboard/layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChevronDown } from "lucide-react";
 import AllTeamMember from "./_components/AllTeamMember";
+import AssignedTeam from "./_components/AssignedTeam";
 
 const TeamPage = () => {
   const [activeTab, setActiveTab] = useState("team-member");
@@ -93,7 +94,7 @@ const TeamPage = () => {
                 <AllTeamMember filter={filter} />
               </TabsContent>
               <TabsContent value="assigned-team">
-                {/* <AssignedTeam /> */}
+                <AssignedTeam />
               </TabsContent>
             </div>
           </Tabs>
