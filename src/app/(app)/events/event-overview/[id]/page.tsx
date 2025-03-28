@@ -1,5 +1,4 @@
 import DashboardLayout from "@/app/(app)/dashboard/layout";
-// import { notFound } from "next/navigation";
 import EventOverviewPage from "../_components/EventOverviewPage";
 import { projectData } from "@/data/data"; // Importing centralized data
 
