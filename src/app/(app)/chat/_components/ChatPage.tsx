@@ -11,6 +11,13 @@ export default function ChatPage() {
   const [newMessage, setNewMessage] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter chats based on search input
+  const filteredChats = mockChats.filter((chat) =>
+    chat.taskName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleSendMessage = () => {
     if (newMessage.trim() === "") return;
     const newMsg: Message = {
@@ -73,36 +80,44 @@ export default function ChatPage() {
             type="text"
             placeholder="Search"
             className="w-full px-8 py-2 border bg-gray-300 rounded"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <ul className="py-4">
-          {mockChats.map((chat) => (
-            <li
-              key={chat.id}
-              className={`p-3 cursor-pointer flex justify-between items-center ${
-                activeChat.id === chat.id ? "bg-blue-100" : ""
-              }`}
-              onClick={() => setActiveChat(chat)}
-            >
-              <p className="text-gray-600">
-                {chat.taskName.length > 15
-                  ? chat.taskName.slice(0, 15) + "..."
-                  : chat.taskName}
-              </p>
-              <div className="flex -space-x-2">
-                {chat.members.slice(0, 5).map((member) => (
-                  <Image
-                    key={member.id}
-                    src={member.profileImage}
-                    width={40}
-                    height={40}
-                    className="w-6 h-6 rounded-full border"
-                    alt={member.name}
-                  />
-                ))}
-              </div>
-            </li>
-          ))}
+          {filteredChats.length > 0 ? (
+            filteredChats.map((chat) => (
+              <li
+                key={chat.id}
+                className={`p-3 cursor-pointer flex justify-between items-center ${
+                  activeChat.id === chat.id ? "bg-blue-100" : ""
+                }`}
+                onClick={() => setActiveChat(chat)}
+              >
+                <p className="text-gray-600">
+                  {chat.taskName.length > 15
+                    ? chat.taskName.slice(0, 15) + "..."
+                    : chat.taskName}
+                </p>
+                <div className="flex -space-x-2">
+                  {chat.members.slice(0, 5).map((member) => (
+                    <Image
+                      key={member.id}
+                      src={member.profileImage}
+                      width={40}
+                      height={40}
+                      className="w-6 h-6 rounded-full border"
+                      alt={member.name}
+                    />
+                  ))}
+                </div>
+              </li>
+            ))
+          ) : (
+            <p className="text-gray-500 italic text-center py-4">
+              No chats found
+            </p>
+          )}
         </ul>
       </aside>
 
@@ -145,7 +160,7 @@ export default function ChatPage() {
                     alt={msg.sender.name}
                     className="w-8 h-8 rounded-full mr-3"
                   />
-                  <div className="absolute bottom-2 right-3 w-2 h-2 bg-green-600 rounded-full"></div>
+                  <div className="absolute bottom-10 right-3 w-2 h-2 bg-green-600 rounded-full"></div>
                 </div>
               )}
               <div className="max-w-xs w-full">
