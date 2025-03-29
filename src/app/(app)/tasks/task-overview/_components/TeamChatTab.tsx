@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Paperclip } from "lucide-react";
+import { ArrowRight, Paperclip, Zap } from "lucide-react";
 import Image from "next/image";
 import { Task } from "@/types/types";
 
@@ -122,7 +122,10 @@ const TeamChatTab: React.FC<TeamChatTabProps> = ({ task }) => {
               >
                 {msg.message && <p className="p-3">{msg.message}</p>}
                 {msg.attachment && (
-                  <div className="p-2 border rounded-xl rounded-tl-none bg-white flex justify-between items-center">
+                  <div className="p-2 border rounded-xl rounded-tl-none bg-white flex justify-start gap-1 items-start">
+                    <div className="border p-1 bg-gray-100 rounded-full">
+                      <Zap size={14} className=" text-gray-600" />
+                    </div>
                     <div>
                       <p className="text-sm font-medium">
                         {msg.attachment.name}
