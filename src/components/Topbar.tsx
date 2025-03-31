@@ -13,6 +13,7 @@ import { Project, Event } from "@/types/types";
 import AddVendorDialog from "@/app/(app)/_components/dialogs/AddVendorDialog";
 import CreateTaskDialog from "@/app/(app)/_components/dialogs/CreateTaskDialog";
 import AddTeamMemberDialog from "@/app/(app)/_components/dialogs/AddTeamMemberDialog";
+import CreateFormDialog from "@/app/(app)/_components/dialogs/CreateFormDialog";
 
 export default function Topbar() {
   const { project, event, guestTag } = useProject();
@@ -78,6 +79,13 @@ export default function Topbar() {
           isOpen={isDialogOpen}
           setIsOpen={setIsDialogOpen}
         />
+      ),
+    },
+    "/feedback": {
+      label: "Create form",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <CreateFormDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
       ),
     },
   };
