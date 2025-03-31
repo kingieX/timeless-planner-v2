@@ -4,23 +4,24 @@ import Topbar from "@/components/Topbar";
 import React, { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AIFormBuilder from "./_components/AIFormBuilder";
 
 export default function Feedbackpage() {
   const [activeTab, setActiveTab] = useState("builder");
   const router = useRouter();
 
   const searchParams = useSearchParams();
-  // const formTitle = searchParams.get("formTitle") || "Default Title";
+  const formTitle = searchParams.get("formTitle") || "Default Title";
   const selectedEvent = searchParams.get("selectedEvent") || "Default Event";
 
   return (
     <div>
       <Topbar />
-      <div className="py-12 px-4">
-        <div className="w-1/4 flex items-center gap-1 border-r">
+      <div className="py-12">
+        <div className="md:w-1/4 w-full bg-white flex items-center gap- border-r fixed z-20">
           <div
             onClick={() => router.push("/feedback")}
-            className="p-2 cursor-pointer rounded-full hover:bg-gray-100"
+            className="p-1 cursor-pointer rounded-full hover:bg-gray-100"
           >
             <ChevronLeft size={20} className="text-gray-600" />
           </div>
@@ -34,13 +35,9 @@ export default function Feedbackpage() {
         </div>
 
         {/* Tabs Navigation */}
-        <Tabs
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="border-r w-1/4"
-        >
-          <div className="w-full flex items-center">
-            <TabsList className="w-full grid grid-cols-4 bg-gray-200 p-1 rounded-md my-3 mr-3">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="">
+          <div className="md:w-1/4 w-full bg-white flex items-center border-r pt-8 fixed z-10">
+            <TabsList className="w-full grid grid-cols-4 bg-gray-200 p-1 rounded-md my-3 mx-3">
               <TabsTrigger
                 value="builder"
                 className={`text-gray-600 rounded-none ${
@@ -77,10 +74,14 @@ export default function Feedbackpage() {
           </div>
 
           {/* Tag Content */}
-          <TabsContent value="builder">{/* <AIFormBuilder /> */}</TabsContent>
-          <TabsContent value="theme">{/* <Theme /> */}</TabsContent>
-          <TabsContent value="logic">{/* <Logic /> */}</TabsContent>
-          <TabsContent value="share">{/* <Share /> */}</TabsContent>
+          <div className="pt-20">
+            <TabsContent value="builder">
+              <AIFormBuilder formTitle={formTitle} />
+            </TabsContent>
+            <TabsContent value="theme">{/* <Theme /> */}</TabsContent>
+            <TabsContent value="logic">{/* <Logic /> */}</TabsContent>
+            <TabsContent value="share">{/* <Share /> */}</TabsContent>
+          </div>
         </Tabs>
       </div>
     </div>
