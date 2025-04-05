@@ -88,6 +88,13 @@ export default function Topbar() {
         <CreateFormDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
       ),
     },
+    "/notification": {
+      label: "Create form",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <CreateFormDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      ),
+    },
   };
 
   // Project Overview Page Button

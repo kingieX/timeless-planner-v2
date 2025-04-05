@@ -1,9 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Pen, X } from "lucide-react";
 import { useState } from "react";
+import FormInteraction from "./FormInteraction";
 
 interface AIFormBuilderProps {
   formTitle: string;
@@ -15,6 +15,15 @@ export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
   const [questions, setQuestions] = useState([
     { id: 1, text: "Did you attend the event?" },
   ]);
+  const [
+    theme,
+    // setTheme,
+  ] = useState({
+    backgroundColor: "#42CEF2",
+    fontColor: "#FFFFFF",
+    fontSize: "16px",
+    backgroundImage: "",
+  });
 
   // Function to add a new question
   const addQuestion = () => {
@@ -105,6 +114,7 @@ export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
                       updatedQuestions[index + 1].text = e.target.value;
                       setQuestions(updatedQuestions);
                     }}
+                    required
                     placeholder="input new question..."
                     className="text-gray-600 font-light text-sm text-center border-none"
                   />
@@ -132,22 +142,7 @@ export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
       </div>
 
       {/* Right Column */}
-      <div className="md:w-2/3 w-full px-4 md:mt-0 mt-4 flex flex-col items- justify-center">
-        <h2 className="mb-2">Your form landing page</h2>
-        <div className="bg-[#42CEF2] flex flex-col justify-center items-center text-white p-10 rounded-lg shadow-lg text-center w-full max-w-7xl md:h-96 h-60">
-          <h1 className="text-xl md:text-4xl font-bold mb-2">
-            Event Survey Form
-          </h1>
-          <p className="text-sm">Share your thoughts and help us improve</p>
-          <Button className="mt-4 md:mt-8 bg-red-500 hover:bg-red-400 text-white">
-            Get Started
-          </Button>
-        </div>
-        <p className="text-xs md:text-left text-center text-gray-500 mt-2">
-          Customize your form's appearance: Change the background, add your
-          logo, and more in the Theme tab.
-        </p>
-      </div>
+      <FormInteraction questions={questions} theme={theme} />
     </div>
   );
 }

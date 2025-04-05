@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AIFormBuilder from "./_components/AIFormBuilder";
+import ThemeTab from "./_components/ThemeTab";
 
 export default function Feedbackpage() {
   const [activeTab, setActiveTab] = useState("builder");
@@ -75,12 +76,16 @@ export default function Feedbackpage() {
 
           {/* Tag Content */}
           <div className="pt-20">
-            <TabsContent value="builder">
-              <AIFormBuilder formTitle={formTitle} />
-            </TabsContent>
-            <TabsContent value="theme">{/* <Theme /> */}</TabsContent>
-            <TabsContent value="logic">{/* <Logic /> */}</TabsContent>
-            <TabsContent value="share">{/* <Share /> */}</TabsContent>
+            <div>
+              <TabsContent value="builder">
+                <AIFormBuilder formTitle={formTitle} />
+              </TabsContent>
+              <TabsContent value="theme">
+                <ThemeTab />
+              </TabsContent>
+              <TabsContent value="logic">{/* <Logic /> */}</TabsContent>
+              <TabsContent value="share">{/* <Share /> */}</TabsContent>
+            </div>
           </div>
         </Tabs>
       </div>
