@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
   Select,
@@ -13,13 +12,13 @@ import { Upload } from "lucide-react";
 import { useState } from "react";
 // import FormInteraction from "./FormInteraction";
 
-interface ThemeTabProps {
-  theme: { backgroundColor: string; fontColor: string; fontSize: string };
-  setTheme: (theme: any) => void;
-}
+// interface ThemeTabProps {
+//   theme: { backgroundColor: string; fontColor: string; fontSize: string };
+//   setTheme: (theme: any) => void;
+// }
 
-export default function ThemeTab({}: // theme, setTheme
-ThemeTabProps) {
+export default function ThemeTab() {
+  // { theme, setTheme }: ThemeTabProps
   const [selectedLayoutColor, setSelectedLayoutColor] = useState("");
   const [selectedTextColor, setSelectedTextColor] = useState("");
   const [selectedButtonColor, setSelectedButtonColor] = useState("");
