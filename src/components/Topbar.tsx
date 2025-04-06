@@ -14,6 +14,7 @@ import AddVendorDialog from "@/app/(app)/_components/dialogs/AddVendorDialog";
 import CreateTaskDialog from "@/app/(app)/_components/dialogs/CreateTaskDialog";
 import AddTeamMemberDialog from "@/app/(app)/_components/dialogs/AddTeamMemberDialog";
 import CreateFormDialog from "@/app/(app)/_components/dialogs/CreateFormDialog";
+import CreateWorkspaceDialog from "@/app/(app)/_components/dialogs/CreateWorkspaceDialog";
 
 export default function Topbar() {
   const { project, event, guestTag } = useProject();
@@ -93,6 +94,16 @@ export default function Topbar() {
       action: () => setIsDialogOpen(true),
       dialog: (
         <CreateFormDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
+      ),
+    },
+    "/workspace": {
+      label: "Create workspace",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <CreateWorkspaceDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+        />
       ),
     },
   };

@@ -50,6 +50,8 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
+  const isActive = pathname.startsWith("/workspace"); // Matches all subpages too
+
   return (
     <div className="flex">
       {/* Sidebar */}
@@ -87,10 +89,17 @@ export default function Sidebar() {
           {/* My Workspace */}
           <Link
             href="/workspace"
-            className="w-full flex justify-between items-center space-x-3 ml-2 px-2 py-4 text-sm rounded transition hover:text-primary text-gray-700"
+            // className="w-full flex justify-between items-center space-x-3 ml-2 px-2 py-4 text-sm rounded transition hover:text-primary text-gray-700"
+            className={`flex items-center space-x-3 md:px-4 px-2 md:py-1 py-2 md:text-sm rounded transition ${
+              isActive
+                ? "bg-gray-100 text-gray-900 font-semibold"
+                : "hover:text-primary text-gray-700"
+            }`}
           >
             <div className="flex items-center gap-2">
-              <Briefcase size={20} />
+              <span className={`${isActive ? "text-primary" : ""}`}>
+                <Briefcase size={20} />
+              </span>
               <span>My workspace</span>
             </div>
             <div className="flex text-gray-900">
