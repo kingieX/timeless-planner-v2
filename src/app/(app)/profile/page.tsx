@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import DashboardLayout from "../dashboard/layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileTab from "./_components/ProfileTab";
+import IntegrationTab from "./_components/IntegrationTab";
+import NotificationsTab from "../notification/_components/NotificationsTab";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -76,13 +78,13 @@ const ProfilePage = () => {
                 <ProfileTab />
               </TabsContent>
               <TabsContent value="integration">
-                {/* <NotificationPreferenceTab /> */}
+                <IntegrationTab />
               </TabsContent>
               <TabsContent value="billing">
                 {/* <NotificationPreferenceTab /> */}
               </TabsContent>
               <TabsContent value="notification">
-                {/* <NotificationPreferenceTab /> */}
+                <NotificationsTab />
               </TabsContent>
             </div>
           </Tabs>
