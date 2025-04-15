@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileTab from "./_components/ProfileTab";
 import IntegrationTab from "./_components/IntegrationTab";
 import NotificationsTab from "../notification/_components/NotificationsTab";
+import BillingTab from "./_components/BillingTab";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -81,7 +82,7 @@ const ProfilePage = () => {
                 <IntegrationTab />
               </TabsContent>
               <TabsContent value="billing">
-                {/* <NotificationPreferenceTab /> */}
+                <BillingTab />
               </TabsContent>
               <TabsContent value="notification">
                 <NotificationsTab />
