@@ -106,6 +106,16 @@ export default function Topbar() {
         />
       ),
     },
+    "/profile": {
+      label: "Create Project",
+      action: () => setIsDialogOpen(true),
+      dialog: (
+        <CreateProjectDialog
+          isOpen={isDialogOpen}
+          setIsOpen={setIsDialogOpen}
+        />
+      ),
+    },
   };
 
   // Project Overview Page Button
@@ -198,7 +208,10 @@ export default function Topbar() {
           </Button>
         )}
 
-        <button className="relative">
+        <button
+          onClick={() => router.push("/notification")}
+          className="relative"
+        >
           <Bell size={24} className="text-secondary hover:text-primary" />
           <span className="absolute -top-2 -right-1 bg-primary text-white text-xs w-4 rounded-full">
             3
