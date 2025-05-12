@@ -1,46 +1,44 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Pen, X } from "lucide-react";
 import { useState } from "react";
-import { useFormBuilder } from "@/context/FormBuilderContext";
 import FormInteraction from "./FormInteraction";
-import { v4 as uuidv4 } from "uuid";
 
 interface AIFormBuilderProps {
   formTitle: string;
 }
 
 export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
-  const { questions, setQuestions } = useFormBuilder();
-
   const [editableFormTitle, setEditableFormTitle] = useState(formTitle);
   const [isEditing, setIsEditing] = useState(false);
+  const [questions, setQuestions] = useState([
+    { id: 1, text: "Did you attend the event?" },
+  ]);
+  const [
+    theme,
+    // setTheme,
+  ] = useState({
+    backgroundColor: "#42CEF2",
+    fontColor: "#FFFFFF",
+    fontSize: "16px",
+    backgroundImage: "",
+  });
 
-  // Add a new question
+  // Function to add a new question
   const addQuestion = () => {
-    const newQuestion = { id: uuidv4(), text: "" };
-    setQuestions([...questions, newQuestion]);
+    setQuestions([...questions, { id: questions.length + 1, text: "" }]);
   };
 
-  // Remove a question
-  const removeQuestion = (id: string) => {
-    const updated = questions.filter((q) => q.id !== id);
-    setQuestions(updated);
-  };
-
-  // Update a single question
-  const updateQuestion = (index: number, newText: string) => {
-    const updated = [...questions];
-    updated[index].text = newText;
-    setQuestions(updated);
+  // Function to remove a question
+  const removeQuestion = (id: number) => {
+    setQuestions(questions.filter((q) => q.id !== id));
   };
 
   return (
-    <div className="flex md:flex-row flex-col gap-4 overflow-y-none">
+    <div className="flex md:flex-row flex-col gap-4">
       {/* Left Column */}
-      <div className="md:w-1/4 w-full flex flex-col justify-between bg-white border-r pt-2 px-4 overflow-y-auto">
+      <div className="md:w-1/4 w-full flex flex-col justify-between bg-white border-r pt-2 px-4 h-scree overflow-y-auto">
         <div className="space-y-4">
           {/* Form Title Section */}
           <div className="border border-gray-50 shadow-sm p-2 rounded">
@@ -50,12 +48,13 @@ export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
                 <Pen size={16} className="cursor-pointer" />
               </button>
             </div>
+
             <Input
               value={editableFormTitle}
               onChange={(e) => setEditableFormTitle(e.target.value)}
               className="mt-1 border-[#00BFA5] text-center font-light"
-              disabled={!isEditing}
-              onBlur={() => setIsEditing(false)}
+              disabled={!isEditing} // Disable input when not editing
+              onBlur={() => setIsEditing(false)} // Stop editing when clicking outside
             />
           </div>
 
@@ -63,47 +62,69 @@ export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
           <div>
             <h3 className="text-sm font-semibold">Forms</h3>
             <p className="text-xs text-gray-500">
-              The forms users will give feedback to
+              The forms user will give feedback to
             </p>
             <div className="mt-2 space-y-1">
-              {/* Display form title */}
+              {/* display form title */}
               <div className="flex justify-between items-center bg-gray-50 rounded-md border-t border-b border-gray-100 p-1">
                 <p className="py-1 px-2 font-light text-sm text-gray-600 bg-slate-100 border rounded">
                   Start
                 </p>
                 <Input
-                  value={formTitle}
+                  value={editableFormTitle}
                   className="text-gray-700 font-light text-sm text-center border-none"
                   disabled
                 />
+                {/* <p className="text-gray-600 font-light text-sm">
+                  {editableFormTitle}
+                </p> */}
                 <X size={16} className="text-gray-600" />
               </div>
 
               {/* Form questions */}
-              {questions.map((q, index) => (
+              <div className="flex justify-between items-center gap-2 bg-gray-50 rounded-md border-t border-b border-gray-100 p-1">
+                <p className="py-1 px-2 font-light text-sm text-gray-600 bg-slate-100 border rounded">
+                  Q1
+                </p>
+                <Input
+                  value={questions[0].text}
+                  onChange={(e) => {
+                    const updatedQuestions = [...questions];
+                    updatedQuestions[0].text = e.target.value;
+                    setQuestions(updatedQuestions);
+                  }}
+                  className="text-gray-600 font-light text-sm border-none text-center"
+                />
+                <div>{/* <X size={16} className="text-gray-600" /> */}</div>
+              </div>
+
+              {/* Dynamically Added Questions */}
+              {questions.slice(1).map((question, index) => (
                 <div
-                  key={q.id}
+                  key={question.id}
                   className="flex justify-between items-center gap-2 bg-gray-50 rounded-md border p-1"
                 >
                   <p className="py-1 px-2 font-light text-sm text-gray-600 bg-slate-100 border rounded">
-                    Q{index + 1}
+                    Q{index + 2}
                   </p>
                   <Input
-                    value={q.text}
-                    onChange={(e) => updateQuestion(index, e.target.value)}
+                    value={question.text}
+                    onChange={(e) => {
+                      const updatedQuestions = [...questions];
+                      updatedQuestions[index + 1].text = e.target.value;
+                      setQuestions(updatedQuestions);
+                    }}
+                    required
                     placeholder="input new question..."
                     className="text-gray-600 font-light text-sm text-center border-none"
                   />
-                  {index > 0 && (
-                    <button onClick={() => removeQuestion(q.id)}>
-                      <X size={16} className="text-gray-600" />
-                    </button>
-                  )}
+                  <button onClick={() => removeQuestion(question.id)}>
+                    <X size={16} className="text-gray-600" />
+                  </button>
                 </div>
               ))}
             </div>
           </div>
-
           {/* Add Interaction Button */}
           <Button
             variant="outline"
@@ -121,7 +142,7 @@ export default function AIFormBuilder({ formTitle }: AIFormBuilderProps) {
       </div>
 
       {/* Right Column */}
-      <FormInteraction />
+      <FormInteraction questions={questions} theme={theme} />
     </div>
   );
 }
