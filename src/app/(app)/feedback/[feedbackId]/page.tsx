@@ -7,6 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AIFormBuilder from "./_components/AIFormBuilder";
 import ThemeTab from "./_components/ThemeTab";
 import { FormBuilderProvider } from "@/context/FormBuilderContext";
+import LogicTab from "./_components/LogicTab";
+import ShareTab from "./_components/ShareTab";
 
 export default function Feedbackpage() {
   const [activeTab, setActiveTab] = useState("builder");
@@ -85,8 +87,12 @@ export default function Feedbackpage() {
                 <TabsContent value="theme">
                   <ThemeTab />
                 </TabsContent>
-                <TabsContent value="logic">{/* <Logic /> */}</TabsContent>
-                <TabsContent value="share">{/* <Share /> */}</TabsContent>
+                <TabsContent value="logic">
+                  <LogicTab />
+                </TabsContent>
+                <TabsContent value="share">
+                  <ShareTab />
+                </TabsContent>
               </div>
             </div>
           </Tabs>

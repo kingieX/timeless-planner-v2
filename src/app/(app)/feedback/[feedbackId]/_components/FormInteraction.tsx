@@ -71,7 +71,7 @@ export default function FormInteraction() {
   };
 
   return (
-    <div className="md:w-2/3 w-full px-4 md:mt-0 mt-4 flex flex-col justify-center">
+    <div className="md:w-2/3 w-full px-4 md:-mt-16 mt-4 flex flex-col justify-center">
       {!showQuestions ? (
         <>
           <h2 className="mb-2">Your form landing page</h2>
